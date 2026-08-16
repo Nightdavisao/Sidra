@@ -421,6 +421,7 @@
 	<string name="info_track_path">Path</string>
 	<string name="info_track_replay_gain">Track ReplayGain</string>
 	<string name="info_album_replay_gain">Album ReplayGain</string>
+	<string name="info_dynamic_replay_gain">Dynamic ReplayGain</string>
 	<string name="info_track_replay_gain_effective">ReplayGain effective value</string>
 	<string name="info_update">Version "%1$s" has been released</string>
 	<string name="info_shared_by">Shared by %1$s</string>
