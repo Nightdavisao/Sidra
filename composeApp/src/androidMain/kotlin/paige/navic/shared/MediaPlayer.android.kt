@@ -626,14 +626,22 @@ class AndroidMediaPlayerViewModel(
 				repeatMode = controller.repeatMode
 			)
 		}
-		applyReplayGain()
+		applyReplayGain(currentSong)
 		updateProgress()
 	}
 
-	private fun applyReplayGain() {
+	private fun applyReplayGain(currentSong: DomainSong?) {
 		if (preferenceManager.replayGainMode != ReplayGainMode.Off) {
 			(_uiState.value.currentSong)?.replayGain?.let { replayGain ->
-				controller?.volume = replayGain.effectiveGain(preferenceManager.replayGainMode)
+				if (preferenceManager.replayGainMode != ReplayGainMode.Dynamic) {
+					controller?.volume = replayGain.effectiveGain(preferenceManager.replayGainMode)
+				} else {
+					if (_uiState.value.queue.all { it.albumId == currentSong?.albumId }) {
+						controller?.volume = replayGain.effectiveGain(ReplayGainMode.Album)
+					} else {
+						controller?.volume = replayGain.effectiveGain(ReplayGainMode.Track)
+					}
+				}
 			}
 		} else {
 			controller?.volume = 1f
