@@ -250,7 +250,7 @@
     <string name="info_syncing_genres">Sincronizando gêneros...</string>
     <string name="info_syncing_artists">Sincronizando artistas...</string>
     <string name="info_syncing_radios">Sincronizando rádios...</string>
-    <string name="info_login_description_start">Faça login na sua instância</string>
+    <string name="info_login_description_start">Faça login na sua instância </string>
 	<string name="info_login_description_end" />
     <string name="info_exception_handler">Isso fará o aplicativo travar imediatamente. Tem certeza?</string>
     <string name="subtitle_data_storage">Gerenciar sincronização, uso de rede e cache</string>
@@ -268,7 +268,7 @@
     <string name="option_radio_name">Nome</string>
     <string name="info_status_idle">Inativo</string>
     <string name="option_downloaded_songs">Músicas baixadas</string>
-    <string name="info_sync_just_now">Agora</string>
+    <string name="info_sync_just_now">Agora mesmo</string>
     <string name="option_last_sync">Última sincronização completa</string>
     <string name="option_radio_stream_url">URL de transmissão</string>
     <string name="option_replay_gain">ReplayGain</string>
@@ -320,7 +320,7 @@
     <string name="action_clear_pending_actions">Limpar ações de sincronização pendentes</string>
     <string name="action_clear_downloads">Limpar downloads</string>
     <string name="action_test_exception_handler">Testar manipulador de exceções</string>
-    <string name="info_streaming_quality">Predefinições de qualidade maiores usam mais dados. A transcodificação pode afetar severamente o tempo de carregamento e fazer com que as letras não sejam sincronizadas. Selecione Sem Perdas se encontrar algum problema.</string>
+    <string name="info_streaming_quality">Predefinições de qualidade maiores usam mais dados. A transcodificação pode afetar severamente o tempo de carregamento e fazer com que as letras não sejam sincronizadas. Selecione "Lossless" se encontrar algum problema.</string>
     <string name="title_select_lyrics">Selecionar letra</string>
     <string name="option_now_playing_slider_style_yoyo">Ioiô</string>
     <string name="option_offline_mode_auto">Automático</string>
