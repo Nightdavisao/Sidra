@@ -81,7 +81,7 @@
     <string name="title_track_info">Informações da faixa</string>
     <string name="subtitle_download_quality">Ajustar qualidade da música baixada</string>
     <string name="subtitle_dynamic_theming">Alterar dinamicamente o tema das páginas de artista e álbum baseado na capa</string>
-    <string name="subtitle_app_icon_designer">Projetado por:%1$s</string>
+    <string name="subtitle_app_icon_designer">Feito por: %1$s</string>
     <string name="subtitle_local_network_denied">Você precisa permitir o acesso a rede local ao Navic para que o seu servidor seja acessível.</string>
     <string name="option_now_playing_slider_style">Estilo do slider</string>
     <string name="option_now_playing_slider_style_flat">Flat</string>
