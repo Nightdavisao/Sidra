@@ -37,7 +37,7 @@
     <string name="title_navigation_bar">Barra de navegação</string>
     <string name="title_mini_player">Mini-player</string>
     <string name="title_miscellaneous">Outros</string>
-    <string name="title_layout">Leiaute</string>
+    <string name="title_layout">Layout</string>
     <string name="title_sort_by">Ordenar por</string>
     <string name="title_direction">Direção</string>
     <string name="title_bulk_download">Baixar todos os álbuns</string>
@@ -62,8 +62,8 @@
     <string name="subtitle_about">Informações, versão, licenças</string>
     <string name="subtitle_playlist">Playlist</string>
     <string name="subtitle_enable_scrobbling">Fazer scrobble de faixas reproduzidas ao seu servidor Navidrome</string>
-    <string name="subtitle_gapless_playback">Experimental. Requer reinicialização do aplicativo. Pode entrar em conflito com o descarregamento de áudio em alguns dispositivos</string>
-    <string name="subtitle_audio_offload">Experimental. Requer reinicialização do aplicativo. Pode entrar em conflito com a reprodução sem interrupções em alguns dispositivos</string>
+    <string name="subtitle_gapless_playback">Experimental. Requer reinicialização do aplicativo. Pode entrar em conflito com o offload de áudio em alguns dispositivos</string>
+    <string name="subtitle_audio_offload">Experimental. Requer reinicialização do aplicativo. Pode entrar em conflito com a reprodução sem pausas em alguns dispositivos</string>
     <string name="subtitle_now_playing_background_style">Escolha estático se tiver problemas de desempenho</string>
     <string name="subtitle_check_for_updates">Recomenda-se manter esta opção ativada, pois algumas atualizações fornecem correções de bugs importantes</string>
     <string name="subtitle_offline_mode">Define quando o aplicativo deve entrar no modo offline. Requer a reinicialização do aplicativo</string>
@@ -85,7 +85,7 @@
     <string name="subtitle_local_network_denied">Você precisa permitir o acesso a rede local ao Navic para que o seu servidor seja acessível.</string>
     <string name="option_now_playing_slider_style">Estilo do slider</string>
     <string name="option_now_playing_slider_style_flat">Flat</string>
-    <string name="option_swipe_to_skip">Deslize para mudar de música</string>
+    <string name="option_swipe_to_skip">Deslizar para mudar de música</string>
     <string name="option_artwork_shape">Formato da capa</string>
     <string name="option_artist_image_shape">Formato da capa do artista</string>
     <string name="option_cover_art_size">Tamanho da capa</string>
@@ -152,10 +152,10 @@
 	<string name="option_cover_art_action">Ação ao tocar na capa</string>
 	<string name="option_explicit_playback">Reprodução de conteúdo explícito</string>
 	<string name="option_explicit_playback_allowed">Permitido</string>
-	<string name="option_explicit_playback_skip">Pular músicas explíticas</string>
-	<string name="option_explicit_playback_skip_session">Pular músicas explíticas para essa sessão</string>
+	<string name="option_explicit_playback_skip">Pular músicas explícitas</string>
+	<string name="option_explicit_playback_skip_session">Pular músicas explícitas para essa sessão</string>
 	<string name="option_auto_fill_queue">Preencher fila automaticamente</string>
-	<string name="subtitle_auto_fill_queue">Automaticamente adicionar uma música aleatória quando só há uma na fila</string>
+	<string name="subtitle_auto_fill_queue">Automaticamente adicionar uma música aleatória quando há apenas uma na fila</string>
 	<string name="info_repeat_off">Repetir desativado</string>
 	<string name="info_repeat_one">Repetir atual</string>
 	<string name="info_repeat_all">Repetir todas</string>
@@ -164,4 +164,65 @@
 	<string name="info_equaliser_mode_not_builtin">Os controles estão disponíveis apenas no modo nativo.</string>
 	<string name="info_lyric_provider_disclaimer">Ativar o LRCLIB e/ou o LyricsPlus irá fazer requisições à serviços externos e não afiliados.</string>
 	<string name="option_cover_art_quality">Qualidade da capa</string>
+	<string name="subtitle_equaliser">Ajustar e melhorar o áudio</string>
+	<string name="option_stream_custom_quality">Usar qualidade alternativa para streaming</string>
+	<string name="option_download_custom_quality">Usar qualidade alternativa para download</string>
+
+	<plurals name="count_songs">
+		<item quantity="one">%1$d música</item>
+		<item quantity="other">%1$d músicas</item>
+	</plurals>
+
+	<plurals name="count_albums">
+		<item quantity="one">%1$d álbum</item>
+		<item quantity="other">%1$d álbuns</item>
+	</plurals>
+
+	<plurals name="count_playlists">
+		<item quantity="one">%1$d playlist</item>
+		<item quantity="other">%1$d playlists</item>
+	</plurals>
+
+	<plurals name="count_artists">
+		<item quantity="one">%1$d artista</item>
+		<item quantity="other">%1$d artistas</item>
+	</plurals>
+
+	<plurals name="count_minutes">
+		<item quantity="one">%1$d minuto</item>
+		<item quantity="other">%1$d minutos</item>
+	</plurals>
+
+	<plurals name="count_hours">
+		<item quantity="one">%1$d hora</item>
+		<item quantity="other">%1$d horas</item>
+	</plurals>
+
+	<plurals name="count_minutes_ago">
+		<item quantity="one">%1$d minuto atrás</item>
+		<item quantity="other">%1$d minutos atrás</item>
+	</plurals>
+
+	<plurals name="count_hours_ago">
+		<item quantity="one">%1$d hora atrás</item>
+		<item quantity="other">%1$d horas atrás</item>
+	</plurals>
+
+	<plurals name="count_days_ago">
+		<item quantity="one">%1$d dia atrás</item>
+		<item quantity="other">%1$d dias atrás</item>
+	</plurals>
+
+	<plurals name="count_rate_stars">
+		<item quantity="one">Avaliar com %1$d estrela</item>
+		<item quantity="other">Avaliar com %1$d estrelas</item>
+	</plurals>
+
+	<plurals name="count_lines">
+		<item quantity="one">%1$d linha selecionada</item>
+		<item quantity="other">%1$d linhas selecionadas</item>
+	</plurals>
+
+	<string name="option_cover_art_action_disabled">Desativado</string>
+	<string name="option_cover_art_action_show_lyrics">Mostrar letras</string>
 </resources>
