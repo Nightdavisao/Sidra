@@ -210,7 +210,7 @@
     <string name="info_lyrics_provider">Letras de %1$s</string>
     <string name="info_image_failed_to_load">Carregamento falhou</string>
     <string name="sideloading_warning_title">PARE, LEIA!</string>
-    <string name="sideloading_warning_subtitle">A Google planeja acabar com o sideloading em TODOS os dispositivos com o Google Play Service instalado.\n</string>
+    <string name="sideloading_warning_subtitle">A Google planeja acabar com o sideloading em TODOS os dispositivos com o Google Play Services instalado.\n</string>
     <string name="sideloading_warning_description">Embora os detalhes exatos dessa mudança ainda não sejam totalmente conhecidos, isso pode resultar no bloqueio de TODAS as instalações de aplicativos de terceiros, a menos que o autor do aplicativo revele a sua identidade ao Google e/ou publicamente.\n\nSe você tem conhecimento suficiente para instalar uma ROM personalizada no seu dispositivo, AGORA É A HORA DE FAZER ISSO.\n\nPor favor leia mais sobre o que você pode fazer e como fazer com que a sua voz seja ouvida</string>
     <string name="sideloading_warning_link_mask">aqui.</string>
     <string name="title_data_storage">Dados e Armazenamento</string>
@@ -219,7 +219,7 @@
     <string name="title_sync_control">Controle de Sincronização</string>
     <string name="title_create_radio">Criar rádio</string>
     <string name="title_radios">Rádios</string>
-    <string name="title_bulk_download">Baixar todos os Álbuns</string>
+    <string name="title_bulk_download">Baixar todos os álbuns</string>
     <string name="title_direction">Direção</string>
     <string name="title_confirm">Confirmar</string>
     <string name="title_cache_management">Armazenamento e Cache</string>
@@ -234,7 +234,7 @@
     <string name="notice_queue_duplicate">Esta música já está na fila. Deseja adicioná-la novamente?</string>
     <string name="action_trigger_sync">Sincronizar manualmente</string>
     <string name="action_rebuild_database">Reconstruir banco de dados</string>
-    <string name="action_add_to_queue">Adicionar à Fila</string>
+    <string name="action_add_to_queue">Adicionar à fila</string>
     <string name="action_dont_show_again">Não mostrar novamente</string>
     <string name="info_not_available_offline">Não disponível offline</string>
     <string name="info_syncing_saving">Salvando...</string>
@@ -250,7 +250,7 @@
     <string name="info_syncing_genres">Sincronizando gêneros...</string>
     <string name="info_syncing_artists">Sincronizando artistas...</string>
     <string name="info_syncing_radios">Sincronizando rádios...</string>
-    <string name="info_login_description_start">Faça login na sua instância </string>
+    <string name="info_login_description_start">Faça login na sua instância</string>
 	<string name="info_login_description_end" />
     <string name="info_exception_handler">Isso fará o aplicativo travar imediatamente. Tem certeza?</string>
     <string name="subtitle_data_storage">Gerenciar sincronização, uso de rede e cache</string>
@@ -295,7 +295,7 @@
     <string name="info_status_downloading">Download em andamento...</string>
     <string name="info_bulk_download_warning">Tem certeza de que deseja baixar todos os álbuns até %1$s?\nIsso pode exigir uma quantidade significativa de armazenamento e dados.</string>
     <string name="info_library_download_warning">Tem certeza de que deseja baixar toda a sua biblioteca?\nIsso ignorará os itens que você já baixou, mas ainda poderá consumir uma quantidade significativa de armazenamento e dados.</string>
-    <string name="info_library_download">Salve todas as músicas sincronizadas para reprodução offline</string>
+    <string name="info_library_download">Salvar todas as músicas sincronizadas para reprodução offline</string>
     <string name="info_progress">Progresso</string>
     <string name="info_in_use">(em uso)</string>
     <string name="info_explicit">Explícito</string>
@@ -315,7 +315,7 @@
     <string name="action_sleep_timer">Temporizador</string>
     <string name="action_sleep_timer_enabled">Temporizador - %1$s restantes</string>
     <string name="action_disable_sleep_timer">Desligar temporizador</string>
-    <string name="action_play_next">Executar a seguir</string>
+    <string name="action_play_next">Tocar a seguir</string>
     <string name="action_clear_image_cache">Limpar cache de imagens</string>
     <string name="action_clear_pending_actions">Limpar ações de sincronização pendentes</string>
     <string name="action_clear_downloads">Limpar downloads</string>
