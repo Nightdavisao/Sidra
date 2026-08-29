@@ -48,6 +48,7 @@ import coil3.compose.LocalPlatformContext as LocalCoilPlatformContext
 @Composable
 fun CoverArt(
 	modifier: Modifier = Modifier,
+	contentScale: ContentScale = ContentScale.Crop,
 	coverArtId: String?,
 	contentDescription: String? = null,
 	onClick: (() -> Unit)? = null,
@@ -107,7 +108,10 @@ fun CoverArt(
 		model = model,
 		contentDescription = contentDescription,
 		modifier = commonModifier,
-		contentScale = ContentScale.Crop,
+		contentScale = if (coverArtId.startsWith("ar-"))
+			ContentScale.Crop
+		else
+			ContentScale.Fit,
 		error = {
 			LaunchedEffect(it.result.throwable) {
 				Logger.w(
