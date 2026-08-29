@@ -48,7 +48,6 @@ import coil3.compose.LocalPlatformContext as LocalCoilPlatformContext
 @Composable
 fun CoverArt(
 	modifier: Modifier = Modifier,
-	contentScale: ContentScale = ContentScale.Crop,
 	coverArtId: String?,
 	contentDescription: String? = null,
 	onClick: (() -> Unit)? = null,
