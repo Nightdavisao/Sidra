@@ -24,8 +24,13 @@ import androidx.media3.common.Tracks
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.DefaultHttpDataSource
+import androidx.media3.exoplayer.BaseRenderer
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.RenderersFactory
+import androidx.media3.exoplayer.audio.DefaultAudioSink
+import androidx.media3.exoplayer.audio.MediaCodecAudioRenderer
+import androidx.media3.exoplayer.mediacodec.MediaCodecSelector
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.session.CommandButton
 import androidx.media3.session.DefaultMediaNotificationProvider
@@ -122,7 +127,20 @@ class PlaybackService : MediaSessionService(), KoinComponent {
 		val dataSourceFactory = DefaultDataSource.Factory(this, httpDataSourceFactory)
 		val mediaSourceFactory = DefaultMediaSourceFactory(dataSourceFactory)
 
-		val player = ExoPlayer.Builder(this)
+		val audioRenderer = RenderersFactory { handler, _, audioListener, _, _ ->
+			arrayOf<BaseRenderer>(
+				MediaCodecAudioRenderer(
+					applicationContext,
+					MediaCodecSelector.DEFAULT,
+					handler,
+					audioListener,
+					DefaultAudioSink.Builder(applicationContext) // apply audio processors here
+						.build()
+				)
+			)
+		}
+
+		val player = ExoPlayer.Builder(this, audioRenderer)
 			.setLoadControl(loadControl)
 			.setMediaSourceFactory(mediaSourceFactory)
 			.setHandleAudioBecomingNoisy(true)
