@@ -4,6 +4,7 @@
 
 **/build/
 **/release/
+**/debug/
 /captures
 /local.properties
 
