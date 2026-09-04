@@ -222,8 +222,6 @@ class PlaybackService : MediaSessionService(), KoinComponent {
 			}
 		})
 
-		preferenceManager
-
 		scope.launch(Dispatchers.Main) {
 			equaliserManager.config.collect { config ->
 				if (config.mode != equaliserMode) {
