@@ -3,6 +3,7 @@
 .gradle
 
 **/build/
+**/release/
 /captures
 /local.properties
 
