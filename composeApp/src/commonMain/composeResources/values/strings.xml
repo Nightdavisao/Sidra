@@ -144,7 +144,7 @@
 	<string name="option_choose_theme">Application theme</string>
 	<string name="option_choose_app_icon">Application icon</string>
 	<string name="option_replay_gain">ReplayGain</string>
-	<string name="option_preamp_gain">Preamp</string>
+	<string name="option_preamp_gain">Audio preamp</string>
 	<string name="option_gapless_playback">Gapless playback</string>
 	<string name="option_audio_offload">Audio offload</string>
 	<string name="option_live_status">Live status</string>

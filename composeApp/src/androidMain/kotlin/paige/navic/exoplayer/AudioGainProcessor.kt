@@ -17,7 +17,7 @@ const val DEFAULT_GAIN = 1f
 @UnstableApi
 class AudioGainProcessor : BaseAudioProcessor() {
 	private val finalVolume: Float
-		get() = (volume + ampValue).decibelsToLinear()
+		get() = (volume + amplifierValue).decibelsToLinear()
 
 	private var volume = 1f
 		set(value) {
@@ -25,7 +25,7 @@ class AudioGainProcessor : BaseAudioProcessor() {
 			flush(StreamMetadata.DEFAULT)
 		}
 
-	var ampValue = 0f
+	var amplifierValue = 0f
 		set(value) {
 			field = value
 			flush(StreamMetadata.DEFAULT)

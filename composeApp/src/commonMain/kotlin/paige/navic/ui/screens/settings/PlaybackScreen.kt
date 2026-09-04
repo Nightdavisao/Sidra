@@ -118,7 +118,7 @@ fun SettingsPlaybackScreen() {
 								) {
 									Text(stringResource(Res.string.option_preamp_gain))
 									Text(
-										"${preferenceManager.preAmpGain}db",
+										"${preferenceManager.preAmpGain.roundToInt()}db",
 										fontFamily = FontFamily.Monospace,
 										fontWeight = FontWeight(400),
 										fontSize = 13.sp,
@@ -128,10 +128,10 @@ fun SettingsPlaybackScreen() {
 								Slider(
 									value = preferenceManager.preAmpGain,
 									onValueChange = {
-										preferenceManager.preAmpGain = it
+										preferenceManager.preAmpGain = it.roundToInt().toFloat()
 									},
-									valueRange = -9f..9f,
-									steps = 9
+									steps = 5,
+									valueRange = -12f..12f,
 								)
 							}
 						}

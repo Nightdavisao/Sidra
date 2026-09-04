@@ -648,12 +648,12 @@ class AndroidMediaPlayerViewModel(
 				repeatMode = controller.repeatMode
 			)
 		}
-		applyReplayGain(currentSong)
+		applyAudioGain(currentSong)
 		updateProgress()
 	}
 
-	private fun applyReplayGain(currentSong: DomainSong?) {
-		audioGainProcessor.ampValue = preferenceManager.preAmpGain
+	private fun applyAudioGain(currentSong: DomainSong?) {
+		audioGainProcessor.amplifierValue = preferenceManager.preAmpGain
 
 		if (preferenceManager.replayGainMode != ReplayGainMode.Off) {
 			(_uiState.value.currentSong)?.replayGain?.let { replayGain ->
