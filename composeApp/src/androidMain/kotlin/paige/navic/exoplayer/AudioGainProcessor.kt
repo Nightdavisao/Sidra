@@ -12,10 +12,13 @@ import paige.navic.util.core.effectiveGain
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
-const val DEFAULT_GAIN = 1f
 
 @UnstableApi
 class AudioGainProcessor : BaseAudioProcessor() {
+	private companion object {
+		const val DEFAULT_GAIN = 1f
+	}
+
 	private val finalVolume: Float
 		get() = (volume + amplifierValue).decibelsToLinear()
 
