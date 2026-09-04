@@ -31,6 +31,7 @@ import navic.composeapp.generated.resources.option_equaliser
 import navic.composeapp.generated.resources.option_explicit_playback
 import navic.composeapp.generated.resources.option_gapless_playback
 import navic.composeapp.generated.resources.option_min_duration_to_scrobble
+import navic.composeapp.generated.resources.option_preamp_gain
 import navic.composeapp.generated.resources.option_replay_gain
 import navic.composeapp.generated.resources.option_scrobble_percentage
 import navic.composeapp.generated.resources.subtitle_audio_offload
@@ -43,6 +44,7 @@ import navic.composeapp.generated.resources.subtitle_streaming_quality
 import navic.composeapp.generated.resources.title_behaviour
 import navic.composeapp.generated.resources.title_playback
 import navic.composeapp.generated.resources.title_streaming_quality
+import paige.navic.util.core.decibelsToLinear
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import paige.navic.LocalNavStack
@@ -108,6 +110,32 @@ fun SettingsPlaybackScreen() {
 							selection = preferenceManager.replayGainMode,
 							onSelect = { preferenceManager.replayGainMode = it }
 						)
+						FormRow {
+							Column(Modifier.fillMaxWidth()) {
+								Row(
+									modifier = Modifier.fillMaxWidth(),
+									horizontalArrangement = Arrangement.SpaceBetween
+								) {
+									Text(stringResource(Res.string.option_preamp_gain))
+									Text(
+										"${preferenceManager.preAmpGain}db",
+										fontFamily = FontFamily.Monospace,
+										fontWeight = FontWeight(400),
+										fontSize = 13.sp,
+										color = MaterialTheme.colorScheme.onSurfaceVariant,
+									)
+								}
+								Slider(
+									value = preferenceManager.preAmpGain,
+									onValueChange = {
+										preferenceManager.preAmpGain = it
+									},
+									valueRange = -9f..9f,
+									steps = 9
+								)
+							}
+						}
+
 						FormRow(
 							onClick = dropUnlessResumed { backStack.add(Screen.Settings.Equaliser) },
 							horizontalArrangement = Arrangement.Start,

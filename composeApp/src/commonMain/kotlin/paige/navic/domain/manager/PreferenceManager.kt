@@ -54,6 +54,7 @@ class PreferenceManager(
 	var scrobblePercentage by preference(.5f)
 	var minDurationToScrobble by preference(30f)
 	var replayGainMode by preference(ReplayGainMode.Off)
+	var preAmpGain by preference(0f)
 	var gaplessPlayback by preference(true)
 	var audioOffload by preference(false)
 

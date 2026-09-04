@@ -75,10 +75,10 @@ import paige.navic.domain.models.settings.EqualiserMode
 import paige.navic.domain.models.settings.ReplayGainMode
 import paige.navic.domain.repositories.PlayerStateRepository
 import paige.navic.domain.repositories.SongRepository
+import paige.navic.exoplayer.AudioGainProcessor
 import paige.navic.ui.core.PlayerUiState
 import paige.navic.util.core.Logger
 import paige.navic.util.core.ResourceProvider
-import paige.navic.util.core.effectiveGain
 import java.io.File
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
@@ -89,6 +89,7 @@ class PlaybackService : MediaSessionService(), KoinComponent {
 	private val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 
 	private var mediaSession: MediaSession? = null
+	private val audioGainProcessor: AudioGainProcessor by inject()
 	private val serviceScope = MainScope()
 	private var scrobbleManager: AndroidScrobbleManager? = null
 	private val resourceProvider: ResourceProvider by inject()
@@ -134,7 +135,8 @@ class PlaybackService : MediaSessionService(), KoinComponent {
 					MediaCodecSelector.DEFAULT,
 					handler,
 					audioListener,
-					DefaultAudioSink.Builder(applicationContext) // apply audio processors here
+					DefaultAudioSink.Builder(applicationContext)
+						.setAudioProcessors(arrayOf(audioGainProcessor))
 						.build()
 				)
 			)
@@ -219,6 +221,8 @@ class PlaybackService : MediaSessionService(), KoinComponent {
 				applyEqualiserMode(equaliserMode, audioSessionId)
 			}
 		})
+
+		preferenceManager
 
 		scope.launch(Dispatchers.Main) {
 			equaliserManager.config.collect { config ->
@@ -425,12 +429,14 @@ class PlaybackService : MediaSessionService(), KoinComponent {
 	}
 }
 
+@UnstableApi
 class AndroidMediaPlayerViewModel(
 	stateRepository: PlayerStateRepository,
 	songRepository: SongRepository,
 	downloadManager: DownloadManager,
 	connectivityManager: ConnectivityManager,
 	preferenceManager: PreferenceManager,
+	private val audioGainProcessor: AudioGainProcessor,
 	private val application: Application,
 	private val albumDao: AlbumDao,
 	private val platformContext: CoilPlatformContext,
@@ -649,20 +655,22 @@ class AndroidMediaPlayerViewModel(
 	}
 
 	private fun applyReplayGain(currentSong: DomainSong?) {
+		audioGainProcessor.ampValue = preferenceManager.preAmpGain
+
 		if (preferenceManager.replayGainMode != ReplayGainMode.Off) {
 			(_uiState.value.currentSong)?.replayGain?.let { replayGain ->
 				if (preferenceManager.replayGainMode != ReplayGainMode.Dynamic) {
-					controller?.volume = replayGain.effectiveGain(preferenceManager.replayGainMode)
+					audioGainProcessor.applyGainMode(replayGain, preferenceManager.replayGainMode)
 				} else {
 					if (_uiState.value.queue.all { it.albumId == currentSong?.albumId }) {
-						controller?.volume = replayGain.effectiveGain(ReplayGainMode.Album)
+						audioGainProcessor.applyGainMode(replayGain, ReplayGainMode.Album)
 					} else {
-						controller?.volume = replayGain.effectiveGain(ReplayGainMode.Track)
+						audioGainProcessor.applyGainMode(replayGain, ReplayGainMode.Track)
 					}
 				}
 			}
 		} else {
-			controller?.volume = 1f
+			audioGainProcessor.resetGain()
 		}
 	}
 
