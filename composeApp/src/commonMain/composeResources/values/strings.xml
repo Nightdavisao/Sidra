@@ -372,6 +372,7 @@
 	<string name="action_reset">Reset</string>
 	<string name="action_configure_lyric_providers">Configure lyric providers</string>
 	<string name="action_visit_site">Visit site</string>
+	<string name="action_scroll_down">Scroll down</string>
 	<string name="subtitle_rebuild_database">Wipes all local metadata and forces a fresh sync</string>
 
 	<string name="notice_deleted_playlist">Playlist deleted.</string>
