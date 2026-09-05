@@ -59,6 +59,7 @@ import org.koin.core.component.inject
 import paige.navic.data.database.dao.AlbumDao
 import paige.navic.data.database.mappers.toDomainModel
 import paige.navic.domain.manager.AndroidScrobbleManager
+import paige.navic.domain.manager.AudioGainManager
 import paige.navic.domain.manager.ConnectivityManager
 import paige.navic.domain.manager.DownloadManager
 import paige.navic.domain.manager.EqualiserManager
@@ -434,7 +435,7 @@ class AndroidMediaPlayerViewModel(
 	downloadManager: DownloadManager,
 	connectivityManager: ConnectivityManager,
 	preferenceManager: PreferenceManager,
-	private val audioGainProcessor: AudioGainProcessor,
+	private val audioGainManager: AudioGainManager,
 	private val application: Application,
 	private val albumDao: AlbumDao,
 	private val platformContext: CoilPlatformContext,
@@ -653,22 +654,22 @@ class AndroidMediaPlayerViewModel(
 	}
 
 	private fun applyAudioGain(currentSong: DomainSong?) {
-		audioGainProcessor.amplifierValue = preferenceManager.preAmpGain
+		audioGainManager.setPreAmp(preferenceManager.preAmpGain)
 
 		if (preferenceManager.replayGainMode != ReplayGainMode.Off) {
 			(_uiState.value.currentSong)?.replayGain?.let { replayGain ->
 				if (preferenceManager.replayGainMode != ReplayGainMode.Dynamic) {
-					audioGainProcessor.applyGainMode(replayGain, preferenceManager.replayGainMode)
+					audioGainManager.applyGainMode(replayGain, preferenceManager.replayGainMode)
 				} else {
 					if (_uiState.value.queue.all { it.albumId == currentSong?.albumId }) {
-						audioGainProcessor.applyGainMode(replayGain, ReplayGainMode.Album)
+						audioGainManager.applyGainMode(replayGain, ReplayGainMode.Album)
 					} else {
-						audioGainProcessor.applyGainMode(replayGain, ReplayGainMode.Track)
+						audioGainManager.applyGainMode(replayGain, ReplayGainMode.Track)
 					}
 				}
 			}
 		} else {
-			audioGainProcessor.resetGain()
+			audioGainManager.resetGain()
 		}
 	}
 

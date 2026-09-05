@@ -22,7 +22,7 @@ class AudioGainProcessor : BaseAudioProcessor() {
 	private val finalVolume: Float
 		get() = (volume + amplifierValue).decibelsToLinear()
 
-	private var volume = 1f
+	private var volume = DEFAULT_GAIN
 		set(value) {
 			field = value
 			flush(StreamMetadata.DEFAULT)

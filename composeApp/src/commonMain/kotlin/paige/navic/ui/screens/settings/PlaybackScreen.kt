@@ -49,6 +49,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import paige.navic.LocalNavStack
 import paige.navic.LocalPlatformContext
+import paige.navic.domain.manager.AudioGainManager
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.domain.models.settings.ExplicitContentPlayback
 import paige.navic.domain.models.settings.ReplayGainMode
@@ -69,6 +70,7 @@ fun SettingsPlaybackScreen() {
 	val platformContext = LocalPlatformContext.current
 	val backStack = LocalNavStack.current
 	val preferenceManager = koinInject<PreferenceManager>()
+	val audioGainManager = koinInject<AudioGainManager>()
 
 	Scaffold(
 		topBar = {
@@ -128,7 +130,8 @@ fun SettingsPlaybackScreen() {
 								Slider(
 									value = preferenceManager.preAmpGain,
 									onValueChange = {
-										preferenceManager.preAmpGain = it.roundToInt().toFloat()
+										preferenceManager.preAmpGain = it
+										audioGainManager.setPreAmp(it)
 									},
 									steps = 5,
 									valueRange = -12f..12f,

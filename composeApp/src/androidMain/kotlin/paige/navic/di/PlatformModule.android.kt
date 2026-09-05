@@ -9,6 +9,7 @@ import org.koin.dsl.module
 import paige.navic.data.database.CacheDatabase
 import paige.navic.data.database.DownloadDatabase
 import paige.navic.domain.manager.AppIconManager
+import paige.navic.domain.manager.AudioGainManager
 import paige.navic.domain.manager.ConnectivityManager
 import paige.navic.domain.manager.LinkManager
 import paige.navic.domain.manager.LogManager
@@ -57,7 +58,7 @@ actual val platformModule = module {
 			platformContext = get(),
 			preferenceManager = get(),
 			snackBarManager = get(),
-			audioGainProcessor = get()
+			audioGainManager = get()
 		)
 	}
 
@@ -68,5 +69,6 @@ actual val platformModule = module {
 	singleOf(::AppIconManager)
 	singleOf(::PermissionManager)
 	singleOf(::LinkManager)
+	singleOf(::AudioGainManager)
 	singleOf(::AudioGainProcessor)
 }
