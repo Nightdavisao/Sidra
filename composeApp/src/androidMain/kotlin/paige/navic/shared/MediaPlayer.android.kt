@@ -649,24 +649,31 @@ class AndroidMediaPlayerViewModel(
 				repeatMode = controller.repeatMode
 			)
 		}
-		applyAudioGain(currentSong)
+		applyAudioGain()
 		updateProgress()
 	}
 
-	private fun applyAudioGain(currentSong: DomainSong?) {
-		audioGainManager.setPreAmp(preferenceManager.preAmpGain)
+	private fun applyAudioGain() {
+		audioGainManager.setAmplifierValues(preferenceManager.rgAmpGain, preferenceManager.ampGain)
 
 		if (preferenceManager.replayGainMode != ReplayGainMode.Off) {
-			(_uiState.value.currentSong)?.replayGain?.let { replayGain ->
+			val currentSong = _uiState.value.currentSong
+			val replayGain = currentSong?.replayGain
+
+			if (replayGain != null) {
+				audioGainManager.setReplayGainMetadata(replayGain)
+
 				if (preferenceManager.replayGainMode != ReplayGainMode.Dynamic) {
-					audioGainManager.applyGainMode(replayGain, preferenceManager.replayGainMode)
+					audioGainManager.applyGainMode(preferenceManager.replayGainMode)
 				} else {
-					if (_uiState.value.queue.all { it.albumId == currentSong?.albumId }) {
-						audioGainManager.applyGainMode(replayGain, ReplayGainMode.Album)
+					if (_uiState.value.queue.all { it.albumId == currentSong.albumId }) {
+						audioGainManager.applyGainMode(ReplayGainMode.Album)
 					} else {
-						audioGainManager.applyGainMode(replayGain, ReplayGainMode.Track)
+						audioGainManager.applyGainMode(ReplayGainMode.Track)
 					}
 				}
+			} else {
+				audioGainManager.setReplayGainMetadata(null)
 			}
 		} else {
 			audioGainManager.resetGain()

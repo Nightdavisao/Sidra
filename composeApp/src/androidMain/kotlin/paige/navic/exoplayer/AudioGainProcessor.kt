@@ -19,23 +19,44 @@ class AudioGainProcessor : BaseAudioProcessor() {
 		const val DEFAULT_GAIN = 1f
 	}
 
-	private val finalVolume: Float
-		get() = (volume + amplifierValue).decibelsToLinear()
+	private var replayGainMetadata: DomainReplayGain? = null
 
+	private val finalVolume: Float
+		get() {
+			// ugly hack: we are checking the volume here because the metadata may get returned anyway, but with its parameters values null
+			return if (this.replayGainMetadata != null && this.volume.toDouble() != 0.0) {
+				(volume + rgAmpValue).decibelsToLinear()
+			} else {
+				(volume + ampValue).decibelsToLinear()
+			}
+		}
+
+	// we should ONLY flush if the gain has changed, flushing needlessly will cause some "bits" of the music to skip
+	// flushing the stream is needed because otherwise the user might hear some crackling after changing values
 	private var volume = DEFAULT_GAIN
 		set(value) {
 			field = value
-			flush(StreamMetadata.DEFAULT)
+			if (field != value) flush(StreamMetadata.DEFAULT)
 		}
 
-	var amplifierValue = 0f
+	var rgAmpValue = 0f
 		set(value) {
 			field = value
-			flush(StreamMetadata.DEFAULT)
+			if (field != value) flush(StreamMetadata.DEFAULT)
 		}
 
-	fun applyGainMode(metadata: DomainReplayGain, mode: ReplayGainMode) {
-		volume = metadata.effectiveGain(mode)
+	var ampValue = 0f
+		set(value) {
+			field = value
+			if (field != value) flush(StreamMetadata.DEFAULT)
+		}
+
+	fun applyGainMode(mode: ReplayGainMode) {
+		volume = replayGainMetadata?.effectiveGain(mode) ?: DEFAULT_GAIN
+	}
+
+	fun setReplayGainMetadata(metadata: DomainReplayGain?) {
+		replayGainMetadata = metadata
 	}
 
 	fun resetGain() {
@@ -63,7 +84,7 @@ class AudioGainProcessor : BaseAudioProcessor() {
 
 		val computedVolume = finalVolume
 
-		if (computedVolume == 1f) {
+		if (computedVolume == DEFAULT_GAIN) {
 			outputBuffer.put(inputBuffer)
 		} else {
 			val shortBufferInput = inputBuffer.asShortBuffer()

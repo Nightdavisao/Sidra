@@ -24,35 +24,23 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.dropUnlessResumed
 import kotlinx.collections.immutable.toImmutableList
 import navic.composeapp.generated.resources.Res
-import navic.composeapp.generated.resources.option_audio_offload
 import navic.composeapp.generated.resources.option_auto_fill_queue
 import navic.composeapp.generated.resources.option_enable_scrobbling
-import navic.composeapp.generated.resources.option_equaliser
 import navic.composeapp.generated.resources.option_explicit_playback
-import navic.composeapp.generated.resources.option_gapless_playback
 import navic.composeapp.generated.resources.option_min_duration_to_scrobble
-import navic.composeapp.generated.resources.option_preamp_gain
-import navic.composeapp.generated.resources.option_replay_gain
 import navic.composeapp.generated.resources.option_scrobble_percentage
-import navic.composeapp.generated.resources.subtitle_audio_offload
 import navic.composeapp.generated.resources.subtitle_auto_fill_queue
 import navic.composeapp.generated.resources.subtitle_enable_scrobbling
-import navic.composeapp.generated.resources.subtitle_equaliser
-import navic.composeapp.generated.resources.subtitle_equaliser_disabled
-import navic.composeapp.generated.resources.subtitle_gapless_playback
 import navic.composeapp.generated.resources.subtitle_streaming_quality
 import navic.composeapp.generated.resources.title_behaviour
 import navic.composeapp.generated.resources.title_playback
 import navic.composeapp.generated.resources.title_streaming_quality
-import paige.navic.util.core.decibelsToLinear
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import paige.navic.LocalNavStack
 import paige.navic.LocalPlatformContext
-import paige.navic.domain.manager.AudioGainManager
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.domain.models.settings.ExplicitContentPlayback
-import paige.navic.domain.models.settings.ReplayGainMode
 import paige.navic.icons.Icons
 import paige.navic.icons.outlined.ChevronForward
 import paige.navic.ui.components.common.Form
@@ -70,7 +58,6 @@ fun SettingsPlaybackScreen() {
 	val platformContext = LocalPlatformContext.current
 	val backStack = LocalNavStack.current
 	val preferenceManager = koinInject<PreferenceManager>()
-	val audioGainManager = koinInject<AudioGainManager>()
 
 	Scaffold(
 		topBar = {
@@ -105,71 +92,20 @@ fun SettingsPlaybackScreen() {
 						Icon(Icons.Outlined.ChevronForward, null)
 					}
 					if (platformContext.platformType == PlatformType.Android) {
-						SettingSelectionRow(
-							title = { Text(stringResource(Res.string.option_replay_gain)) },
-							items = ReplayGainMode.entries.toImmutableList(),
-							label = { stringResource(it.displayName) },
-							selection = preferenceManager.replayGainMode,
-							onSelect = { preferenceManager.replayGainMode = it }
-						)
-						FormRow {
-							Column(Modifier.fillMaxWidth()) {
-								Row(
-									modifier = Modifier.fillMaxWidth(),
-									horizontalArrangement = Arrangement.SpaceBetween
-								) {
-									Text(stringResource(Res.string.option_preamp_gain))
-									Text(
-										"${preferenceManager.preAmpGain.roundToInt()}db",
-										fontFamily = FontFamily.Monospace,
-										fontWeight = FontWeight(400),
-										fontSize = 13.sp,
-										color = MaterialTheme.colorScheme.onSurfaceVariant,
-									)
-								}
-								Slider(
-									value = preferenceManager.preAmpGain,
-									onValueChange = {
-										preferenceManager.preAmpGain = it
-										audioGainManager.setPreAmp(it)
-									},
-									steps = 5,
-									valueRange = -12f..12f,
-								)
-							}
-						}
-
 						FormRow(
-							onClick = dropUnlessResumed { backStack.add(Screen.Settings.Equaliser) },
-							horizontalArrangement = Arrangement.Start,
-							enabled = !preferenceManager.audioOffload
+							onClick = dropUnlessResumed { backStack.add(Screen.Settings.Effects) },
+							horizontalArrangement = Arrangement.Start
 						) {
 							Column(Modifier.weight(1f)) {
-								Text(stringResource(Res.string.option_equaliser))
+								Text("Audio effects")
 								Text(
-									text = stringResource(
-										if (!preferenceManager.audioOffload)
-											Res.string.subtitle_equaliser
-										else Res.string.subtitle_equaliser_disabled
-									),
+									text = "Adjust how the music sounds",
 									style = MaterialTheme.typography.bodyMedium,
 									color = MaterialTheme.colorScheme.onSurfaceVariant
 								)
 							}
 							Icon(Icons.Outlined.ChevronForward, null)
 						}
-						SettingSwitchRow(
-							title = { Text(stringResource(Res.string.option_gapless_playback)) },
-							subtitle = { Text(stringResource(Res.string.subtitle_gapless_playback)) },
-							value = preferenceManager.gaplessPlayback,
-							onSetValue = { preferenceManager.gaplessPlayback = it }
-						)
-						SettingSwitchRow(
-							title = { Text(stringResource(Res.string.option_audio_offload)) },
-							subtitle = { Text(stringResource(Res.string.subtitle_audio_offload)) },
-							value = preferenceManager.audioOffload,
-							onSetValue = { preferenceManager.audioOffload = it }
-						)
 					}
 					SettingSelectionRow(
 						title = { Text(stringResource(Res.string.option_explicit_playback)) },

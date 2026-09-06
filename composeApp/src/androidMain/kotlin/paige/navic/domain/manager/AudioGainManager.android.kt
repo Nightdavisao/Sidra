@@ -10,17 +10,21 @@ actual class AudioGainManager(
 	private val audioGainProcessor: AudioGainProcessor
 ) {
     actual fun applyGainMode(
-        metadata: DomainReplayGain,
         mode: ReplayGainMode
     ) {
-		audioGainProcessor.applyGainMode(metadata, mode)
+		audioGainProcessor.applyGainMode(mode)
     }
 
     actual fun resetGain() {
 		audioGainProcessor.resetGain()
     }
 
-	actual fun setPreAmp(value: Float) {
-		audioGainProcessor.amplifierValue = value
+	actual fun setAmplifierValues(withReplayGain: Float, withoutReplayGain: Float) {
+		audioGainProcessor.rgAmpValue = withReplayGain
+		audioGainProcessor.ampValue = withoutReplayGain
+	}
+
+	actual fun setReplayGainMetadata(metadata: DomainReplayGain?) {
+		audioGainProcessor.setReplayGainMetadata(metadata)
 	}
 }
