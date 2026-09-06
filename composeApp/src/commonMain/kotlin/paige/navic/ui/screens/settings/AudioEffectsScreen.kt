@@ -34,12 +34,19 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.dropUnlessResumed
 import navic.composeapp.generated.resources.Res
 import navic.composeapp.generated.resources.option_audio_offload
+import navic.composeapp.generated.resources.option_dynamic_replaygain_tip
 import navic.composeapp.generated.resources.option_equaliser
 import navic.composeapp.generated.resources.option_gapless_playback
+import navic.composeapp.generated.resources.option_preamp_tip
+import navic.composeapp.generated.resources.option_preamp_with_rg
+import navic.composeapp.generated.resources.option_preamp_without_rg
+import navic.composeapp.generated.resources.option_replaygain_mode
 import navic.composeapp.generated.resources.subtitle_audio_offload
 import navic.composeapp.generated.resources.subtitle_equaliser
 import navic.composeapp.generated.resources.subtitle_equaliser_disabled
 import navic.composeapp.generated.resources.subtitle_gapless_playback
+import navic.composeapp.generated.resources.title_audio_effects
+import navic.composeapp.generated.resources.title_playback
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import paige.navic.LocalNavStack
@@ -67,7 +74,7 @@ fun AudioEffectsScreen() {
 	Scaffold(
 		topBar = {
 			NestedTopBar(
-				title = { Text("Audio effects") }
+				title = { Text(stringResource(Res.string.title_audio_effects)) }
 			)
 		},
 		contentWindowInsets = WindowInsets.statusBars
@@ -83,7 +90,7 @@ fun AudioEffectsScreen() {
 			) {
 				Column {
 					Form(Modifier.selectableGroup()) {
-						FormTitle("Playback")
+						FormTitle(stringResource(Res.string.title_playback))
 
 						FormRow(
 							onClick = dropUnlessResumed { backStack.add(Screen.Settings.Equaliser) },
@@ -121,7 +128,7 @@ fun AudioEffectsScreen() {
 
 				Column {
 					Form(Modifier.selectableGroup()) {
-						FormTitle("ReplayGain mode")
+						FormTitle(stringResource(Res.string.option_replaygain_mode))
 
 						ReplayGainMode.entries.forEach { mode ->
 							val interactionSource = remember { MutableInteractionSource() }
@@ -150,11 +157,7 @@ fun AudioEffectsScreen() {
 					}
 				}
 
-				InformationTip(
-					"""
-					Setting ReplayGain to Dynamic will use the album gain if an album is playing. Otherwise, the track gain will be used instead.
-				""".trimIndent()
-				)
+				InformationTip(stringResource(Res.string.option_dynamic_replaygain_tip))
 
 				Column {
 					Form(Modifier.selectableGroup()) {
@@ -165,7 +168,7 @@ fun AudioEffectsScreen() {
 									modifier = Modifier.fillMaxWidth(),
 									horizontalArrangement = Arrangement.SpaceBetween
 								) {
-									Text("With ReplayGain tags")
+									Text(stringResource(Res.string.option_preamp_with_rg))
 									Text(
 										preferenceManager.rgAmpGain.decibelsToHuman(),
 										fontFamily = FontFamily.Monospace,
@@ -193,7 +196,7 @@ fun AudioEffectsScreen() {
 									modifier = Modifier.fillMaxWidth(),
 									horizontalArrangement = Arrangement.SpaceBetween
 								) {
-									Text("Without ReplayGain tags")
+									Text(stringResource(Res.string.option_preamp_without_rg))
 									Text(
 										preferenceManager.ampGain.decibelsToHuman(),
 										fontFamily = FontFamily.Monospace,
@@ -218,11 +221,7 @@ fun AudioEffectsScreen() {
 					}
 				}
 
-				InformationTip(
-					"""
-					Setting either of the preamp options to a very high value might cause audio distortion.
-				""".trimIndent()
-				)
+				InformationTip(stringResource(Res.string.option_preamp_tip))
 			}
 		}
 	}

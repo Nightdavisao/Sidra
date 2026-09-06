@@ -29,9 +29,11 @@ import navic.composeapp.generated.resources.option_enable_scrobbling
 import navic.composeapp.generated.resources.option_explicit_playback
 import navic.composeapp.generated.resources.option_min_duration_to_scrobble
 import navic.composeapp.generated.resources.option_scrobble_percentage
+import navic.composeapp.generated.resources.subtitle_audio_effects
 import navic.composeapp.generated.resources.subtitle_auto_fill_queue
 import navic.composeapp.generated.resources.subtitle_enable_scrobbling
 import navic.composeapp.generated.resources.subtitle_streaming_quality
+import navic.composeapp.generated.resources.title_audio_effects
 import navic.composeapp.generated.resources.title_behaviour
 import navic.composeapp.generated.resources.title_playback
 import navic.composeapp.generated.resources.title_streaming_quality
@@ -97,9 +99,9 @@ fun SettingsPlaybackScreen() {
 							horizontalArrangement = Arrangement.Start
 						) {
 							Column(Modifier.weight(1f)) {
-								Text("Audio effects")
+								Text(stringResource(Res.string.title_audio_effects))
 								Text(
-									text = "Adjust how the music sounds",
+									text = stringResource(Res.string.subtitle_audio_effects),
 									style = MaterialTheme.typography.bodyMedium,
 									color = MaterialTheme.colorScheme.onSurfaceVariant
 								)
