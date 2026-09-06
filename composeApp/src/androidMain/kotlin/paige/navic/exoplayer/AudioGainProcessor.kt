@@ -35,20 +35,20 @@ class AudioGainProcessor : BaseAudioProcessor() {
 	// flushing the stream is needed because otherwise the user might hear some crackling after changing values
 	private var volume = DEFAULT_GAIN
 		set(value) {
-			field = value
 			if (field != value) flush(StreamMetadata.DEFAULT)
+			field = value
 		}
 
 	var rgAmpValue = 0f
 		set(value) {
-			field = value
 			if (field != value) flush(StreamMetadata.DEFAULT)
+			field = value
 		}
 
 	var ampValue = 0f
 		set(value) {
-			field = value
 			if (field != value) flush(StreamMetadata.DEFAULT)
+			field = value
 		}
 
 	fun applyGainMode(mode: ReplayGainMode) {
