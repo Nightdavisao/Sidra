@@ -88,135 +88,128 @@ fun AudioEffectsScreen() {
 					.verticalScroll(rememberScrollState())
 					.padding(top = 16.dp, end = 16.dp, start = 16.dp)
 			) {
-				Column {
-					Form(Modifier.selectableGroup()) {
-						FormTitle(stringResource(Res.string.title_playback))
 
-						FormRow(
-							onClick = dropUnlessResumed { backStack.add(Screen.Settings.Equaliser) },
-							horizontalArrangement = Arrangement.Start,
-							enabled = !preferenceManager.audioOffload
-						) {
-							Column(Modifier.weight(1f)) {
-								Text(stringResource(Res.string.option_equaliser))
-								Text(
-									text = stringResource(
-										if (!preferenceManager.audioOffload)
-											Res.string.subtitle_equaliser
-										else Res.string.subtitle_equaliser_disabled
-									),
-									style = MaterialTheme.typography.bodyMedium,
-									color = MaterialTheme.colorScheme.onSurfaceVariant
-								)
-							}
-							Icon(Icons.Outlined.ChevronForward, null)
+				FormTitle(stringResource(Res.string.title_playback))
+				Form {
+					FormRow(
+						onClick = dropUnlessResumed { backStack.add(Screen.Settings.Equaliser) },
+						horizontalArrangement = Arrangement.Start,
+						enabled = !preferenceManager.audioOffload
+					) {
+						Column(Modifier.weight(1f)) {
+							Text(stringResource(Res.string.option_equaliser))
+							Text(
+								text = stringResource(
+									if (!preferenceManager.audioOffload)
+										Res.string.subtitle_equaliser
+									else Res.string.subtitle_equaliser_disabled
+								),
+								style = MaterialTheme.typography.bodyMedium,
+								color = MaterialTheme.colorScheme.onSurfaceVariant
+							)
 						}
-						SettingSwitchRow(
-							title = { Text(stringResource(Res.string.option_gapless_playback)) },
-							subtitle = { Text(stringResource(Res.string.subtitle_gapless_playback)) },
-							value = preferenceManager.gaplessPlayback,
-							onSetValue = { preferenceManager.gaplessPlayback = it }
-						)
-						SettingSwitchRow(
-							title = { Text(stringResource(Res.string.option_audio_offload)) },
-							subtitle = { Text(stringResource(Res.string.subtitle_audio_offload)) },
-							value = preferenceManager.audioOffload,
-							onSetValue = { preferenceManager.audioOffload = it }
-						)
+						Icon(Icons.Outlined.ChevronForward, null)
 					}
+					SettingSwitchRow(
+						title = { Text(stringResource(Res.string.option_gapless_playback)) },
+						subtitle = { Text(stringResource(Res.string.subtitle_gapless_playback)) },
+						value = preferenceManager.gaplessPlayback,
+						onSetValue = { preferenceManager.gaplessPlayback = it }
+					)
+					SettingSwitchRow(
+						title = { Text(stringResource(Res.string.option_audio_offload)) },
+						subtitle = { Text(stringResource(Res.string.subtitle_audio_offload)) },
+						value = preferenceManager.audioOffload,
+						onSetValue = { preferenceManager.audioOffload = it }
+					)
 				}
 
-				Column {
-					Form(Modifier.selectableGroup()) {
-						FormTitle(stringResource(Res.string.option_replaygain_mode))
+				FormTitle(stringResource(Res.string.option_replaygain_mode))
+				Form(Modifier.selectableGroup()) {
+					ReplayGainMode.entries.forEach { mode ->
+						val interactionSource = remember { MutableInteractionSource() }
 
-						ReplayGainMode.entries.forEach { mode ->
-							val interactionSource = remember { MutableInteractionSource() }
+						FormRow(
+							modifier = Modifier.selectable(
+								selected = preferenceManager.replayGainMode == mode,
+								interactionSource = interactionSource,
+								onClick = {
+									preferenceManager.replayGainMode = mode
+									audioGainManager.applyGainMode(mode)
+								},
+								role = Role.RadioButton
+							),
+							horizontalArrangement = Arrangement.spacedBy(14.dp),
+							contentPadding = PaddingValues(16.dp)
+						) {
+							RadioButton(
+								selected = preferenceManager.replayGainMode == mode,
+								onClick = null
+							)
 
-							FormRow(
-								modifier = Modifier.selectable(
-									selected = preferenceManager.replayGainMode == mode,
-									interactionSource = interactionSource,
-									onClick = {
-										preferenceManager.replayGainMode = mode
-										audioGainManager.applyGainMode(mode)
-									},
-									role = Role.RadioButton
-								),
-								horizontalArrangement = Arrangement.spacedBy(14.dp),
-								contentPadding = PaddingValues(16.dp)
-							) {
-								RadioButton(
-									selected = preferenceManager.replayGainMode == mode,
-									onClick = null
-								)
-
-								Text(stringResource(mode.displayName))
-							}
+							Text(stringResource(mode.displayName))
 						}
 					}
 				}
 
 				InformationTip(stringResource(Res.string.option_dynamic_replaygain_tip))
 
-				Column {
-					Form(Modifier.selectableGroup()) {
-						FormTitle("Preamp options")
-						FormRow {
-							Column(Modifier.fillMaxWidth()) {
-								Row(
-									modifier = Modifier.fillMaxWidth(),
-									horizontalArrangement = Arrangement.SpaceBetween
-								) {
-									Text(stringResource(Res.string.option_preamp_with_rg))
-									Text(
-										preferenceManager.rgAmpGain.decibelsToHuman(),
-										fontFamily = FontFamily.Monospace,
-										fontWeight = FontWeight(400),
-										fontSize = 13.sp,
-										color = MaterialTheme.colorScheme.onSurfaceVariant,
-									)
-								}
-								Slider(
-									value = preferenceManager.rgAmpGain,
-									onValueChange = {
-										preferenceManager.rgAmpGain = it.round(1)
-										audioGainManager.setAmplifierValues(
-											it,
-											preferenceManager.ampGain
-										)
-									},
-									valueRange = -12f..12f,
+				FormTitle("Preamp options")
+				Form {
+					FormRow {
+						Column(Modifier.fillMaxWidth()) {
+							Row(
+								modifier = Modifier.fillMaxWidth(),
+								horizontalArrangement = Arrangement.SpaceBetween
+							) {
+								Text(stringResource(Res.string.option_preamp_with_rg))
+								Text(
+									preferenceManager.rgAmpGain.decibelsToHuman(),
+									fontFamily = FontFamily.Monospace,
+									fontWeight = FontWeight(400),
+									fontSize = 13.sp,
+									color = MaterialTheme.colorScheme.onSurfaceVariant,
 								)
 							}
+							Slider(
+								value = preferenceManager.rgAmpGain,
+								onValueChange = {
+									preferenceManager.rgAmpGain = it.round(1)
+									audioGainManager.setAmplifierValues(
+										it,
+										preferenceManager.ampGain
+									)
+								},
+								valueRange = -12f..12f,
+							)
 						}
-						FormRow {
-							Column(Modifier.fillMaxWidth()) {
-								Row(
-									modifier = Modifier.fillMaxWidth(),
-									horizontalArrangement = Arrangement.SpaceBetween
-								) {
-									Text(stringResource(Res.string.option_preamp_without_rg))
-									Text(
-										preferenceManager.ampGain.decibelsToHuman(),
-										fontFamily = FontFamily.Monospace,
-										fontWeight = FontWeight(400),
-										fontSize = 13.sp,
-										color = MaterialTheme.colorScheme.onSurfaceVariant,
-									)
-								}
-								Slider(
-									value = preferenceManager.ampGain,
-									onValueChange = {
-										preferenceManager.ampGain = it.round(1)
-										audioGainManager.setAmplifierValues(
-											preferenceManager.rgAmpGain,
-											it
-										)
-									},
-									valueRange = -12f..12f,
+					}
+					FormRow {
+						Column(Modifier.fillMaxWidth()) {
+							Row(
+								modifier = Modifier.fillMaxWidth(),
+								horizontalArrangement = Arrangement.SpaceBetween
+							) {
+								Text(stringResource(Res.string.option_preamp_without_rg))
+								Text(
+									preferenceManager.ampGain.decibelsToHuman(),
+									fontFamily = FontFamily.Monospace,
+									fontWeight = FontWeight(400),
+									fontSize = 13.sp,
+									color = MaterialTheme.colorScheme.onSurfaceVariant,
 								)
 							}
+							Slider(
+								value = preferenceManager.ampGain,
+								onValueChange = {
+									preferenceManager.ampGain = it.round(1)
+									audioGainManager.setAmplifierValues(
+										preferenceManager.rgAmpGain,
+										it
+									)
+								},
+								valueRange = -12f..12f,
+							)
 						}
 					}
 				}
@@ -247,7 +240,7 @@ private fun Float.decibelsToHuman(): String {
 }
 
 @Composable
-fun InformationTip(text: String) {
+private fun InformationTip(text: String) {
 	Row(
 		modifier = Modifier.padding(horizontal = 8.dp),
 		horizontalArrangement = Arrangement.spacedBy(16.dp)
