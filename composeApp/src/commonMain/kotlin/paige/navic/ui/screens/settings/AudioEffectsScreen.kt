@@ -41,6 +41,7 @@ import navic.composeapp.generated.resources.option_preamp_tip
 import navic.composeapp.generated.resources.option_preamp_with_rg
 import navic.composeapp.generated.resources.option_preamp_without_rg
 import navic.composeapp.generated.resources.option_replaygain_mode
+import navic.composeapp.generated.resources.option_title_preamp
 import navic.composeapp.generated.resources.subtitle_audio_offload
 import navic.composeapp.generated.resources.subtitle_equaliser
 import navic.composeapp.generated.resources.subtitle_equaliser_disabled
@@ -154,7 +155,7 @@ fun AudioEffectsScreen() {
 
 				InformationTip(stringResource(Res.string.option_dynamic_replaygain_tip))
 
-				FormTitle("Preamp options")
+				FormTitle(stringResource(Res.string.option_title_preamp))
 				Form {
 					FormRow {
 						Column(Modifier.fillMaxWidth()) {
