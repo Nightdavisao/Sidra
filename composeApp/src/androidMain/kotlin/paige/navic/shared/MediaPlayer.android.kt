@@ -32,6 +32,10 @@ import androidx.media3.exoplayer.audio.DefaultAudioSink
 import androidx.media3.exoplayer.audio.MediaCodecAudioRenderer
 import androidx.media3.exoplayer.mediacodec.MediaCodecSelector
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
+import androidx.media3.extractor.DefaultExtractorsFactory
+import androidx.media3.extractor.flac.FlacExtractor
+import androidx.media3.extractor.mp3.Mp3Extractor
+import androidx.media3.extractor.mp4.Mp4Extractor
 import androidx.media3.session.CommandButton
 import androidx.media3.session.DefaultMediaNotificationProvider
 import androidx.media3.session.MediaController
@@ -127,7 +131,13 @@ class PlaybackService : MediaSessionService(), KoinComponent {
 		val httpDataSourceFactory = DefaultHttpDataSource.Factory()
 			.setDefaultRequestProperties(preferenceManager.customHeadersMap())
 		val dataSourceFactory = DefaultDataSource.Factory(this, httpDataSourceFactory)
-		val mediaSourceFactory = DefaultMediaSourceFactory(dataSourceFactory)
+
+		val extractorsFactory = DefaultExtractorsFactory()
+			.setMp3ExtractorFlags(Mp3Extractor.FLAG_DISABLE_ID3_METADATA)
+			.setFlacExtractorFlags(FlacExtractor.FLAG_DISABLE_ID3_METADATA)
+			.setDisableArtworkMetadata(true)
+
+		val mediaSourceFactory = DefaultMediaSourceFactory(dataSourceFactory, extractorsFactory)
 
 		val audioRenderer = RenderersFactory { handler, _, audioListener, _, _ ->
 			arrayOf<BaseRenderer>(
