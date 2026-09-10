@@ -37,7 +37,7 @@ import navic.composeapp.generated.resources.info_shared_by
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import paige.navic.LocalSnackBarState
+import paige.navic.di.LocalSnackBarState
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.domain.manager.ShareManager
 import paige.navic.domain.models.DomainShare
@@ -47,7 +47,7 @@ import paige.navic.icons.outlined.Share
 import paige.navic.ui.components.common.CoverArt
 import paige.navic.ui.components.common.Dropdown
 import paige.navic.ui.components.common.DropdownItem
-import paige.navic.util.core.toHoursMinutesSeconds
+import paige.navic.util.toHoursMinutesSeconds
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.seconds
 

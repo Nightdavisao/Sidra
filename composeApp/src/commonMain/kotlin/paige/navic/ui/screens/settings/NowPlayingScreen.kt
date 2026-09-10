@@ -39,7 +39,7 @@ import navic.composeapp.generated.resources.title_layout
 import navic.composeapp.generated.resources.title_now_playing
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import paige.navic.LocalPlatformContext
+import paige.navic.di.LocalPlatformContext
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.domain.models.settings.CoverArtTapAction
 import paige.navic.domain.models.settings.NowPlayingBackgroundStyle

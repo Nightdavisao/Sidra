@@ -1,4 +1,4 @@
-package paige.navic.util.core
+package paige.navic.di
 
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
@@ -29,5 +29,3 @@ actual fun rememberPlatformContext(): PlatformContext {
 		}
 	}
 }
-
-actual fun <T> synchronized(lock: Any, block: () -> T): T = block()

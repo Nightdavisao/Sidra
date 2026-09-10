@@ -52,8 +52,8 @@ import navic.composeapp.generated.resources.title_layout
 import navic.composeapp.generated.resources.title_miscellaneous
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import paige.navic.LocalNavStack
-import paige.navic.LocalPlatformContext
+import paige.navic.di.LocalNavStack
+import paige.navic.di.LocalPlatformContext
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.domain.models.settings.AnimationStyle
 import paige.navic.domain.models.settings.MarqueeSpeed
@@ -67,7 +67,7 @@ import paige.navic.ui.screens.settings.components.SettingSwitchRow
 import paige.navic.ui.screens.settings.dialogs.ArtworkShapeDialog
 import paige.navic.ui.screens.settings.dialogs.GridSizeDialog
 import paige.navic.ui.screens.settings.dialogs.GridSizePreview
-import paige.navic.util.core.PlatformType
+import paige.navic.di.PlatformType
 
 @Composable
 fun SettingsAppearanceScreen() {

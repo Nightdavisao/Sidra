@@ -55,7 +55,7 @@ import navic.composeapp.generated.resources.option_custom_headers
 import navic.composeapp.generated.resources.subtitle_local_network_denied
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import paige.navic.LocalNavStack
+import paige.navic.di.LocalNavStack
 import paige.navic.domain.manager.LoginManager
 import paige.navic.domain.manager.PermissionManager
 import paige.navic.icons.Icons

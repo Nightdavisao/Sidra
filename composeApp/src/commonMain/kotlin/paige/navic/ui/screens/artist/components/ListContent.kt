@@ -37,7 +37,7 @@ import paige.navic.ui.components.common.ContentUnavailable
 import paige.navic.ui.components.layouts.ArtGrid
 import paige.navic.ui.core.UiState
 import paige.navic.ui.screens.artist.ArtistListScreenGridItem
-import paige.navic.util.ui.withoutTop
+import paige.navic.ui.util.withoutTop
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)

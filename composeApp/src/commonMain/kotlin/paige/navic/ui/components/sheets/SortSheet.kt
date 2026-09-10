@@ -46,7 +46,7 @@ import paige.navic.icons.outlined.Download
 import paige.navic.icons.outlined.ListArrow
 import paige.navic.icons.outlined.Star
 import paige.navic.ui.theme.defaultFont
-import paige.navic.util.ui.segmentedShapes
+import paige.navic.ui.util.segmentedShapes
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalMaterial3Api::class)
 @Composable

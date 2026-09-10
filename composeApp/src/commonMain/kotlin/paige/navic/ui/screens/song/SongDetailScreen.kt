@@ -24,7 +24,7 @@ import paige.navic.ui.components.layouts.NestedTopBar
 import paige.navic.ui.screens.song.components.SongDetailScreenInfoRow
 import paige.navic.ui.screens.song.viewmodels.SongDetailViewModel
 import paige.navic.ui.theme.NavicTheme
-import paige.navic.util.ui.rememberColorSchemeFromCoverArt
+import paige.navic.ui.util.rememberColorSchemeFromCoverArt
 
 @Composable
 fun SongDetailScreen(

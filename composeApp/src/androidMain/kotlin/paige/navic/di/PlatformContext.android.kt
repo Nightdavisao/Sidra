@@ -1,4 +1,4 @@
-package paige.navic.util.core
+package paige.navic.di
 
 import android.os.Build
 import androidx.activity.compose.LocalActivity
@@ -66,5 +66,3 @@ actual fun rememberPlatformContext(): PlatformContext {
 		}
 	}
 }
-
-actual fun <T> synchronized(lock: Any, block: () -> T): T = kotlin.synchronized(lock, block)

@@ -35,7 +35,7 @@ import navic.composeapp.generated.resources.info_explicit
 import navic.composeapp.generated.resources.info_not_available_offline
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import paige.navic.LocalNavStack
+import paige.navic.di.LocalNavStack
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.domain.models.DomainExplicitStatus
 import paige.navic.domain.models.DomainSong
@@ -49,10 +49,10 @@ import paige.navic.ui.components.common.CoverArt
 import paige.navic.ui.components.common.MarqueeText
 import paige.navic.ui.components.common.Waveform
 import paige.navic.ui.navigation.Screen
-import paige.navic.util.core.buildSongInfoString
-import paige.navic.util.ui.DraggableListState
-import paige.navic.util.ui.dragHandle
-import paige.navic.util.ui.segmentedShapes
+import paige.navic.ui.util.buildSongInfoString
+import paige.navic.ui.util.DraggableListState
+import paige.navic.ui.util.dragHandle
+import paige.navic.ui.util.segmentedShapes
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable

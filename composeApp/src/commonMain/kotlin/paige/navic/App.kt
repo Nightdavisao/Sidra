@@ -2,7 +2,6 @@ package paige.navic
 
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.SharedTransitionLayout
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.animation.core.EaseOutQuart
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -35,7 +34,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
@@ -112,10 +110,14 @@ import paige.navic.ui.screens.song.SongDetailSheet
 import paige.navic.ui.screens.song.SongListScreen
 import paige.navic.ui.screens.starred.StarredScreen
 import paige.navic.ui.theme.NavicTheme
-import paige.navic.util.core.PlatformContext
-import paige.navic.util.core.PlatformType
-import paige.navic.util.core.rememberPlatformContext
-import paige.navic.util.ui.Material3Transitions
+import paige.navic.di.PlatformType
+import paige.navic.di.rememberPlatformContext
+import paige.navic.di.LocalBottomBarScrollManager
+import paige.navic.di.LocalNavStack
+import paige.navic.di.LocalPlatformContext
+import paige.navic.di.LocalSharedTransitionScope
+import paige.navic.di.LocalSnackBarState
+import paige.navic.ui.util.Material3Transitions
 
 @OptIn(ExperimentalSerializationApi::class)
 private val config = SavedStateConfiguration {
@@ -124,17 +126,6 @@ private val config = SavedStateConfiguration {
 			subclassesOfSealed<Screen>()
 		}
 	}
-}
-
-val LocalPlatformContext =
-	staticCompositionLocalOf<PlatformContext> { error("no platform context") }
-val LocalNavStack = staticCompositionLocalOf<NavBackStack<NavKey>> { error("no backstack") }
-val LocalSnackBarState = staticCompositionLocalOf<SnackbarHostState> { error("no snack bar state") }
-val LocalSharedTransitionScope =
-	staticCompositionLocalOf<SharedTransitionScope> { error("no shared transition scope") }
-
-val LocalBottomBarScrollManager = staticCompositionLocalOf<BottomBarScrollManager> {
-	error("No BottomBarScrollManager provided")
 }
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class, ExperimentalMaterial3ExpressiveApi::class)

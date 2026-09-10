@@ -1,4 +1,4 @@
-package paige.navic.util.ui
+package paige.navic.ui.util
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
@@ -20,7 +20,6 @@ import paige.navic.domain.manager.PreferenceManager
 import paige.navic.domain.manager.SessionManager
 import paige.navic.domain.models.settings.ThemeMode
 import paige.navic.shared.MediaPlayerViewModel
-import paige.navic.ui.util.toImageBitmap
 import coil3.compose.LocalPlatformContext as LocalCoilPlatformContext
 
 @Composable

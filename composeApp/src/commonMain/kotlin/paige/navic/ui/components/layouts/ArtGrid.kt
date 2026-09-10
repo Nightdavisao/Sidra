@@ -39,15 +39,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.ui.LocalNavAnimatedContentScope
 import org.koin.compose.koinInject
-import paige.navic.LocalPlatformContext
-import paige.navic.LocalSharedTransitionScope
+import paige.navic.di.LocalPlatformContext
+import paige.navic.di.LocalSharedTransitionScope
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.domain.models.settings.ListViewMode
 import paige.navic.ui.components.common.CoverArt
 import paige.navic.ui.components.common.ErrorBox
 import paige.navic.ui.core.UiState
-import paige.navic.util.ui.EmphasizedDecelerateEasing
-import paige.navic.util.ui.shimmerLoading
+import paige.navic.ui.util.EmphasizedDecelerateEasing
+import paige.navic.ui.util.shimmerLoading
 
 @Composable
 fun ArtGrid(

@@ -1,4 +1,4 @@
-package paige.navic.util.core
+package paige.navic.di
 
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
@@ -26,5 +26,3 @@ enum class PlatformType {
 
 @Composable
 expect fun rememberPlatformContext(): PlatformContext
-
-expect fun <T> synchronized(lock: Any, block: () -> T): T

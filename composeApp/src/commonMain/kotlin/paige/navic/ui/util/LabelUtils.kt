@@ -1,4 +1,4 @@
-package paige.navic.util.core
+package paige.navic.ui.util
 
 import androidx.compose.runtime.Composable
 import com.materialkolor.PaletteStyle

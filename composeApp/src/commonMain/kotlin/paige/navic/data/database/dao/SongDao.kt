@@ -7,7 +7,7 @@ import androidx.room3.Query
 import androidx.room3.Transaction
 import androidx.room3.Upsert
 import paige.navic.data.database.entities.SongEntity
-import paige.navic.util.core.Logger
+import paige.navic.util.Logger
 
 @Dao
 interface SongDao {

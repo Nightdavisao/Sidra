@@ -41,7 +41,7 @@ import paige.navic.data.database.mappers.toDomainModel
 import paige.navic.data.database.mappers.toEntity
 import paige.navic.domain.manager.SessionManager
 import paige.navic.domain.models.DomainArtist
-import paige.navic.util.core.Logger
+import paige.navic.util.Logger
 import kotlin.coroutines.cancellation.CancellationException
 import dev.zt64.subsonic.api.model.Album as ApiAlbum
 import dev.zt64.subsonic.api.model.AlbumListType as ApiAlbumListType

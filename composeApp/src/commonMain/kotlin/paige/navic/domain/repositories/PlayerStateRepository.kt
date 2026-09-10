@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import paige.navic.ui.core.PlayerUiState
-import paige.navic.util.core.Logger
+import paige.navic.util.Logger
 
 class PlayerStateRepository(
 	private val preferences: DataStore<Preferences>

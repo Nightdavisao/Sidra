@@ -1,4 +1,4 @@
-package paige.navic.util.core
+package paige.navic.ui.util
 
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material3.Icon
@@ -23,7 +23,7 @@ import navic.composeapp.generated.resources.info_explicit
 import navic.composeapp.generated.resources.info_external_song
 import navic.composeapp.generated.resources.info_external_song_description
 import org.jetbrains.compose.resources.stringResource
-import paige.navic.LocalSnackBarState
+import paige.navic.di.LocalSnackBarState
 import paige.navic.domain.models.DomainSong
 import paige.navic.domain.models.DomainSongArtist
 import paige.navic.icons.Icons

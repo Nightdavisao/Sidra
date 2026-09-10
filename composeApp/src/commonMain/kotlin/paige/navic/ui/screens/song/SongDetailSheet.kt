@@ -31,7 +31,7 @@ import paige.navic.ui.components.common.Form
 import paige.navic.ui.screens.song.components.SongDetailScreenInfoRow
 import paige.navic.ui.screens.song.viewmodels.SongDetailViewModel
 import paige.navic.ui.theme.NavicTheme
-import paige.navic.util.ui.rememberColorSchemeFromCoverArt
+import paige.navic.ui.util.rememberColorSchemeFromCoverArt
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable

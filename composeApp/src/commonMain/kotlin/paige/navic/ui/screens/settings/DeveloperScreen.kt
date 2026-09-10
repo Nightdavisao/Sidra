@@ -31,8 +31,8 @@ import navic.composeapp.generated.resources.title_developer
 import navic.composeapp.generated.resources.title_logs
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import paige.navic.LocalNavStack
-import paige.navic.LocalPlatformContext
+import paige.navic.di.LocalNavStack
+import paige.navic.di.LocalPlatformContext
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.icons.Icons
 import paige.navic.icons.outlined.ChevronForward
@@ -42,7 +42,7 @@ import paige.navic.ui.components.common.FormRow
 import paige.navic.ui.components.dialogs.FormDialog
 import paige.navic.ui.components.layouts.NestedTopBar
 import paige.navic.ui.navigation.Screen
-import paige.navic.util.core.PlatformType
+import paige.navic.di.PlatformType
 
 @Composable
 fun SettingsDeveloperScreen() {

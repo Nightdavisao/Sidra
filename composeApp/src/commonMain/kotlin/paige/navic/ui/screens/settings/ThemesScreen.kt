@@ -77,7 +77,7 @@ import paige.navic.ui.components.common.FormTitle
 import paige.navic.ui.components.common.TooltipBox
 import paige.navic.ui.components.layouts.NestedTopBar
 import paige.navic.ui.screens.settings.components.SettingSelectionRow
-import paige.navic.util.core.label
+import paige.navic.ui.util.label
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable

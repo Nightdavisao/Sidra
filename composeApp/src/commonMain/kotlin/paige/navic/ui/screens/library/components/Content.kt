@@ -39,7 +39,7 @@ import paige.navic.ui.screens.album.components.AlbumListScreenGridItem
 import paige.navic.ui.screens.artist.ArtistListScreenGridItem
 import paige.navic.ui.screens.genre.components.GenreListScreenCard
 import paige.navic.ui.screens.playlist.components.PlaylistListScreenGridItem
-import paige.navic.util.ui.withoutTop
+import paige.navic.ui.util.withoutTop
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -50,7 +50,7 @@ import navic.composeapp.generated.resources.title_audio_effects
 import navic.composeapp.generated.resources.title_playback
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import paige.navic.LocalNavStack
+import paige.navic.di.LocalNavStack
 import paige.navic.domain.manager.AudioGainManager
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.domain.models.settings.ReplayGainMode

@@ -30,7 +30,7 @@ import navic.composeapp.generated.resources.title_create_share
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-import paige.navic.LocalSnackBarState
+import paige.navic.di.LocalSnackBarState
 import paige.navic.icons.Icons
 import paige.navic.icons.outlined.Share
 import paige.navic.ui.components.common.DurationPicker

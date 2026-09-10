@@ -19,7 +19,6 @@ import paige.navic.domain.manager.StorageManager
 import paige.navic.exoplayer.AudioGainProcessor
 import paige.navic.shared.AndroidMediaPlayerViewModel
 import paige.navic.shared.MediaPlayerViewModel
-import paige.navic.util.core.PlatformType
 
 @UnstableApi
 actual val platformModule = module {

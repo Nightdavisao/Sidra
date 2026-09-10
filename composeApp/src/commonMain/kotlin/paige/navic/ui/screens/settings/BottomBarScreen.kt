@@ -32,7 +32,7 @@ import navic.composeapp.generated.resources.title_mini_player
 import navic.composeapp.generated.resources.title_navigation_bar
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import paige.navic.LocalPlatformContext
+import paige.navic.di.LocalPlatformContext
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.domain.models.settings.BottomBarCollapseMode
 import paige.navic.domain.models.settings.BottomBarVisibilityMode
@@ -49,7 +49,7 @@ import paige.navic.ui.components.layouts.NestedTopBar
 import paige.navic.ui.screens.settings.components.SettingSelectionRow
 import paige.navic.ui.screens.settings.components.SettingSwitchRow
 import paige.navic.ui.screens.settings.dialogs.NavtabsDialog
-import paige.navic.util.core.isLandscape
+import paige.navic.di.isLandscape
 
 @Composable
 fun BottomBarScreen() {

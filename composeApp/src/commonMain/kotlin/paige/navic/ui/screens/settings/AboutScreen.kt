@@ -36,8 +36,8 @@ import navic.composeapp.generated.resources.title_discord_server
 import navic.composeapp.generated.resources.title_github
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import paige.navic.LocalNavStack
-import paige.navic.LocalPlatformContext
+import paige.navic.di.LocalNavStack
+import paige.navic.di.LocalPlatformContext
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.icons.Icons
 import paige.navic.icons.outlined.ChevronForward
@@ -47,7 +47,7 @@ import paige.navic.ui.components.dialogs.LinkConfirmationDialog
 import paige.navic.ui.components.layouts.NestedTopBar
 import paige.navic.ui.navigation.Screen
 import paige.navic.ui.screens.settings.components.SettingSwitchRow
-import paige.navic.util.core.PlatformType
+import paige.navic.di.PlatformType
 
 @Composable
 fun SettingsAboutScreen() {

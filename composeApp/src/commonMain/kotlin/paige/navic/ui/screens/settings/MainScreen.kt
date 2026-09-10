@@ -41,7 +41,7 @@ import navic.composeapp.generated.resources.title_settings
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import paige.navic.LocalNavStack
+import paige.navic.di.LocalNavStack
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.icons.Icons
 import paige.navic.icons.filled.BottomNavigation

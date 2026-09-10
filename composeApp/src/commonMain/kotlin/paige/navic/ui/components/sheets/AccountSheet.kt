@@ -40,7 +40,7 @@ import navic.composeapp.generated.resources.action_sleep_timer_songs_enabled
 import navic.composeapp.generated.resources.action_view_shares
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import paige.navic.LocalNavStack
+import paige.navic.di.LocalNavStack
 import paige.navic.domain.manager.LoginManager
 import paige.navic.domain.manager.SleepTimerManager
 import paige.navic.domain.manager.SleepTimerMode
@@ -53,7 +53,7 @@ import paige.navic.ui.components.common.FormRow
 import paige.navic.ui.components.common.Monogram
 import paige.navic.ui.navigation.Screen
 import paige.navic.ui.theme.positive
-import paige.navic.util.core.label
+import paige.navic.ui.util.label
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

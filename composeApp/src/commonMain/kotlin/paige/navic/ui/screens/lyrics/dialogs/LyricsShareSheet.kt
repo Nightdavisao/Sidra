@@ -72,7 +72,7 @@ import navic.composeapp.generated.resources.action_share_lyrics
 import navic.composeapp.generated.resources.app_name
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import paige.navic.LocalSnackBarState
+import paige.navic.di.LocalSnackBarState
 import paige.navic.domain.manager.SessionManager
 import paige.navic.domain.manager.ShareManager
 import paige.navic.domain.models.DomainSong

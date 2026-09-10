@@ -15,11 +15,11 @@ import navic.composeapp.generated.resources.info_error
 import navic.composeapp.generated.resources.info_error_show
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
-import paige.navic.LocalSnackBarState
+import paige.navic.di.LocalSnackBarState
 import paige.navic.ui.components.common.ErrorCodeBlock
 import paige.navic.ui.components.common.FormButton
 import paige.navic.ui.components.dialogs.FormDialog
-import paige.navic.util.core.Logger
+import paige.navic.util.Logger
 
 @Composable
 fun ErrorSnackBar(

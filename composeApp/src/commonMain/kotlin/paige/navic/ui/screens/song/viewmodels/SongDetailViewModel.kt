@@ -30,9 +30,9 @@ import paige.navic.domain.manager.PreferenceManager
 import paige.navic.domain.models.DomainSong
 import paige.navic.domain.repositories.CollectionRepository
 import paige.navic.ui.core.UiState
-import paige.navic.util.core.effectiveGain
-import paige.navic.util.core.toFileSize
-import paige.navic.util.core.toHoursMinutesSeconds
+import paige.navic.util.effectiveGain
+import paige.navic.util.toFileSize
+import paige.navic.util.toHoursMinutesSeconds
 
 class SongDetailViewModel(
 	songId: String,
