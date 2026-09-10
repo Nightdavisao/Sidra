@@ -21,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.dropUnlessResumed
 import navic.composeapp.generated.resources.Res
 import navic.composeapp.generated.resources.action_cancel
 import navic.composeapp.generated.resources.action_ok
@@ -30,13 +29,11 @@ import navic.composeapp.generated.resources.info_update_check
 import navic.composeapp.generated.resources.option_check_for_updates
 import navic.composeapp.generated.resources.subtitle_check_for_updates
 import navic.composeapp.generated.resources.title_about
-import navic.composeapp.generated.resources.title_acknowledgements
 import navic.composeapp.generated.resources.title_codeberg
 import navic.composeapp.generated.resources.title_discord_server
 import navic.composeapp.generated.resources.title_github
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
-import paige.navic.di.LocalNavStack
 import paige.navic.di.LocalPlatformContext
 import paige.navic.di.PlatformType
 import paige.navic.domain.manager.PreferenceManager
@@ -44,7 +41,6 @@ import paige.navic.ui.components.common.SegmentedListItem
 import paige.navic.ui.components.common.SegmentedListItemDefaults
 import paige.navic.ui.components.dialogs.LinkConfirmationDialog
 import paige.navic.ui.components.layouts.NestedTopBar
-import paige.navic.ui.navigation.Screen
 import paige.navic.ui.screens.settings.components.SettingsGroup
 import paige.navic.ui.screens.settings.components.SettingsGroupDefaults
 import paige.navic.ui.screens.settings.components.SettingsNavItem
@@ -57,7 +53,6 @@ fun SettingsAboutScreen() {
 
 	@Suppress("DEPRECATION")
 	val clipboard = LocalClipboardManager.current
-	val backStack = LocalNavStack.current
 	val platformContext = LocalPlatformContext.current
 	val hideBack = platformContext.sizeClass.widthSizeClass >= WindowWidthSizeClass.Medium
 	var linkToOpen by rememberSaveable { mutableStateOf<String?>(null) }
@@ -108,13 +103,8 @@ fun SettingsAboutScreen() {
 				)
 				SettingsNavItem(
 					onClick = { linkToOpen = "https://discord.gg/TBcnNX66PH" },
-					shapes = SegmentedListItemDefaults.segmentedShapes(index = 2, count = 4),
+					shapes = SegmentedListItemDefaults.segmentedShapes(index = 2, count = 3),
 					content = { Text(stringResource(Res.string.title_discord_server)) }
-				)
-				SettingsNavItem(
-					onClick = dropUnlessResumed { backStack.add(Screen.Settings.Acknowledgements) },
-					shapes = SegmentedListItemDefaults.segmentedShapes(index = 3, count = 4),
-					content = { Text(stringResource(Res.string.title_acknowledgements)) }
 				)
 			}
 

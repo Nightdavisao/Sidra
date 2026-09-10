@@ -59,7 +59,14 @@ import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import org.jetbrains.compose.resources.getString
 import org.koin.compose.koinInject
+import paige.navic.di.LocalBottomBarScrollManager
+import paige.navic.di.LocalNavStack
+import paige.navic.di.LocalPlatformContext
+import paige.navic.di.LocalSharedTransitionScope
+import paige.navic.di.LocalSnackBarState
+import paige.navic.di.PlatformType
 import paige.navic.di.initializeSingletonImageLoader
+import paige.navic.di.rememberPlatformContext
 import paige.navic.domain.manager.BottomBarScrollManager
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.domain.manager.SessionManager
@@ -90,7 +97,6 @@ import paige.navic.ui.screens.settings.AudioEffectsScreen
 import paige.navic.ui.screens.settings.BottomBarScreen
 import paige.navic.ui.screens.settings.FontsScreen
 import paige.navic.ui.screens.settings.SettingsAboutScreen
-import paige.navic.ui.screens.settings.SettingsAcknowledgementsScreen
 import paige.navic.ui.screens.settings.SettingsAppIconScreen
 import paige.navic.ui.screens.settings.SettingsAppearanceScreen
 import paige.navic.ui.screens.settings.SettingsCustomHeadersScreen
@@ -110,13 +116,6 @@ import paige.navic.ui.screens.song.SongDetailSheet
 import paige.navic.ui.screens.song.SongListScreen
 import paige.navic.ui.screens.starred.StarredScreen
 import paige.navic.ui.theme.NavicTheme
-import paige.navic.di.PlatformType
-import paige.navic.di.rememberPlatformContext
-import paige.navic.di.LocalBottomBarScrollManager
-import paige.navic.di.LocalNavStack
-import paige.navic.di.LocalPlatformContext
-import paige.navic.di.LocalSharedTransitionScope
-import paige.navic.di.LocalSnackBarState
 import paige.navic.ui.util.Material3Transitions
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -378,9 +377,6 @@ private fun entryProvider(
 		}
 		entry<Screen.Settings.About>(metadata = detailPane("settings")) {
 			SettingsAboutScreen()
-		}
-		entry<Screen.Settings.Acknowledgements> {
-			SettingsAcknowledgementsScreen()
 		}
 		entry<Screen.Settings.DataStorage>(metadata = detailPane("settings")) {
 			SettingsDataStorageScreen()

@@ -154,10 +154,6 @@ sealed interface Screen : NavKey {
 
 		@Immutable
 		@Serializable
-		data object Acknowledgements : Settings
-
-		@Immutable
-		@Serializable
 		data object DataStorage : Settings
 
 		@Immutable
