@@ -22,6 +22,7 @@ import androidx.lifecycle.compose.dropUnlessResumed
 import navic.composeapp.generated.resources.Res
 import navic.composeapp.generated.resources.action_cancel
 import navic.composeapp.generated.resources.action_ok
+import navic.composeapp.generated.resources.action_reset_dont_show_agains
 import navic.composeapp.generated.resources.action_test_exception_handler
 import navic.composeapp.generated.resources.info_exception_handler
 import navic.composeapp.generated.resources.option_custom_headers
@@ -93,6 +94,14 @@ fun SettingsDeveloperScreen() {
 							Text(stringResource(Res.string.title_logs))
 							Icon(Icons.Outlined.ChevronForward, null)
 						}
+					}
+					FormRow(
+						onClick = {
+							preferenceManager.shushQueueDuplicateDialog = false
+						}
+					) {
+						Text(stringResource(Res.string.action_reset_dont_show_agains))
+						Icon(Icons.Outlined.ChevronForward, null)
 					}
 				}
 				Form {

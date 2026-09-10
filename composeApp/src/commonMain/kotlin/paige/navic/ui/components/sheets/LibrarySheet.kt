@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.kyant.capsule.ContinuousCapsule
-import com.mikepenz.aboutlibraries.entity.Developer
 import com.mikepenz.aboutlibraries.entity.Library
 import com.mikepenz.aboutlibraries.ui.compose.LibraryDefaults
 import com.mikepenz.aboutlibraries.ui.compose.m3.style.m3VariantColors
@@ -41,7 +40,7 @@ fun LibrarySheet(
 		}
 	) {
 		LibrarySheetDetail(
-			library = library.copy(developers = listOf(Developer(name = "rniii", ""))),
+			library = library,
 			style = LibraryDefaults.librariesStyle(
 				colors = LibraryDefaults.m3VariantColors(),
 				textStyles = LibraryDefaults.m3VariantTextStyles()

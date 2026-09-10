@@ -146,14 +146,14 @@ fun SongListScreen(
 					},
 					onSetStarred = { viewModel.starSong(it) },
 					onPlayNext = { song ->
-						if (player.uiState.value.queue.any { it.id == song.id }) {
+						if (player.uiState.value.queue.any { it.id == song.id } && !preferenceManager.shushQueueDuplicateDialog) {
 							songToQueue = song
 						} else {
 							player.playNextSingle(song)
 						}
 					},
 					onAddToQueue = { song ->
-						if (player.uiState.value.queue.any { it.id == song.id }) {
+						if (player.uiState.value.queue.any { it.id == song.id } && !preferenceManager.shushQueueDuplicateDialog) {
 							songToQueue = song
 						} else {
 							player.addToQueueSingle(song)

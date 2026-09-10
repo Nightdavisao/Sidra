@@ -43,6 +43,8 @@ import paige.navic.ui.theme.defaultFont
 @Composable
 fun FormDialog(
 	width: Dp = 300.dp,
+	contentGap: Dp = 12.dp,
+	verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(12.dp),
 	onDismissRequest: () -> Unit,
 	icon: @Composable () -> Unit = {},
 	title: @Composable () -> Unit = {},
@@ -110,7 +112,7 @@ fun FormDialog(
 							.padding(16.dp)
 							.fillMaxWidth(),
 						horizontalAlignment = Alignment.CenterHorizontally,
-						verticalArrangement = Arrangement.spacedBy(12.dp)
+						verticalArrangement = verticalArrangement
 					) {
 						Spacer(Modifier.height(12.dp))
 						CompositionLocalProvider(
@@ -135,7 +137,7 @@ fun FormDialog(
 								content()
 							}
 						}
-						Spacer(Modifier.height(12.dp))
+						Spacer(Modifier.height(contentGap))
 						Form(
 							bottomPadding = 0.dp,
 							spacing = 4.dp

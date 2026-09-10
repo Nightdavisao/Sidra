@@ -109,14 +109,14 @@ fun GenreDetailScreen(
 				onAddSongStar = { songsViewModel.starSong(true) },
 				onRemoveSongStar = { songsViewModel.starSong(false) },
 				onPlaySongNext = { song ->
-					if (player.uiState.value.queue.any { it.id == song.id }) {
+					if (player.uiState.value.queue.any { it.id == song.id } && !preferenceManager.shushQueueDuplicateDialog) {
 						songToQueue = song
 					} else {
 						player.playNextSingle(song)
 					}
 				},
 				onAddSongToQueue = { song ->
-					if (player.uiState.value.queue.any { it.id == song.id }) {
+					if (player.uiState.value.queue.any { it.id == song.id } && !preferenceManager.shushQueueDuplicateDialog) {
 						songToQueue = song
 					} else {
 						player.addToQueueSingle(song)

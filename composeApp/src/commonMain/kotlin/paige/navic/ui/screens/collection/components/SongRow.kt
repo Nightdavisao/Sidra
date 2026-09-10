@@ -119,14 +119,14 @@ fun CollectionDetailScreenSongRow(
 		gesturesEnabled = !isExplicit,
 		onDismiss = {
 			if (it == SwipeToDismissBoxValue.StartToEnd) {
-				if (playerState.queue.any { item -> item.id == song.id }) {
+				if (playerState.queue.any { item -> item.id == song.id } && !preferenceManager.shushQueueDuplicateDialog) {
 					isPlayNextPending = false
 				} else {
 					onAddToQueue()
 				}
 			}
 			if (it == SwipeToDismissBoxValue.EndToStart) {
-				if (playerState.queue.any { item -> item.id == song.id }) {
+				if (playerState.queue.any { item -> item.id == song.id } && !preferenceManager.shushQueueDuplicateDialog) {
 					isPlayNextPending = true
 				} else {
 					onPlayNext()

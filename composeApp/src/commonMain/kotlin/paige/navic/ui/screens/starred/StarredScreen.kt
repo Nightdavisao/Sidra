@@ -55,7 +55,12 @@ fun StarredScreen() {
 
 	val songsViewModel = koinViewModel<SongListViewModel>(
 		key = "starredSongs",
-		parameters = { parametersOf(DomainSongListType.FrequentlyPlayed, setOf(DomainFilter.Starred)) },
+		parameters = {
+			parametersOf(
+				DomainSongListType.FrequentlyPlayed,
+				setOf(DomainFilter.Starred)
+			)
+		},
 		viewModelStoreOwner = persistentViewModelStoreOwner
 	)
 	val songsState by songsViewModel.songsState.collectAsStateWithLifecycle()
@@ -66,7 +71,12 @@ fun StarredScreen() {
 
 	val albumsViewModel = koinViewModel<AlbumListViewModel>(
 		key = "starredAlbums",
-		parameters = { parametersOf(DomainAlbumListType.AlphabeticalByArtist, setOf(DomainFilter.Starred)) },
+		parameters = {
+			parametersOf(
+				DomainAlbumListType.AlphabeticalByArtist,
+				setOf(DomainFilter.Starred)
+			)
+		},
 		viewModelStoreOwner = persistentViewModelStoreOwner
 	)
 	val albumsState by albumsViewModel.albumsState.collectAsStateWithLifecycle()
@@ -76,7 +86,12 @@ fun StarredScreen() {
 
 	val artistsViewModel = koinViewModel<ArtistListViewModel>(
 		key = "starredArtists",
-		parameters = { parametersOf(DomainArtistListType.AlphabeticalByName, setOf(DomainFilter.Starred)) },
+		parameters = {
+			parametersOf(
+				DomainArtistListType.AlphabeticalByName,
+				setOf(DomainFilter.Starred)
+			)
+		},
 		viewModelStoreOwner = persistentViewModelStoreOwner
 	)
 	val artistsState by artistsViewModel.artistsState.collectAsStateWithLifecycle()
@@ -97,7 +112,8 @@ fun StarredScreen() {
 		topBar = { NestedTopBar({ Text(stringResource(Res.string.title_starred)) }) },
 		bottomBar = {
 			val scrollManager = LocalBottomBarScrollManager.current
-			val preferVisible = preferenceManager.bottomBarVisibilityMode == BottomBarVisibilityMode.AllScreens
+			val preferVisible =
+				preferenceManager.bottomBarVisibilityMode == BottomBarVisibilityMode.AllScreens
 			if (!platformContext.isLandscape() && preferVisible) {
 				RootBottomBar(scrolled = scrollManager.isTriggered)
 			}
@@ -144,14 +160,14 @@ fun StarredScreen() {
 					songsViewModel.deleteDownload(song.id)
 				},
 				onPlaySongNext = { song ->
-					if (player.uiState.value.queue.any { it.id == song.id }) {
+					if (player.uiState.value.queue.any { it.id == song.id } && !preferenceManager.shushQueueDuplicateDialog) {
 						songToQueue = song
 					} else {
 						player.playNextSingle(song)
 					}
 				},
 				onAddSongToQueue = { song ->
-					if (player.uiState.value.queue.any { it.id == song.id }) {
+					if (player.uiState.value.queue.any { it.id == song.id } && !preferenceManager.shushQueueDuplicateDialog) {
 						songToQueue = song
 					} else {
 						player.addToQueueSingle(song)

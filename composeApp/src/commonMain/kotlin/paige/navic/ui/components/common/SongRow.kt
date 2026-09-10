@@ -209,7 +209,7 @@ fun SongRow(
 			},
 			onShare = onShare,
 			onPlayNext = {
-				if (player.uiState.value.queue.any { it.id == song.id }) {
+				if (player.uiState.value.queue.any { it.id == song.id } && !preferenceManager.shushQueueDuplicateDialog) {
 					duplicateQueueDialogShown = true
 					duplicateQueueDialogShownPlayNext = true
 				} else {
@@ -217,7 +217,7 @@ fun SongRow(
 				}
 			},
 			onAddToQueue = {
-				if (player.uiState.value.queue.any { it.id == song.id }) {
+				if (player.uiState.value.queue.any { it.id == song.id } && !preferenceManager.shushQueueDuplicateDialog) {
 					duplicateQueueDialogShown = true
 					duplicateQueueDialogShownPlayNext = false
 				} else {

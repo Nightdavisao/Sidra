@@ -250,7 +250,7 @@ fun SearchScreen(
 
 									LaunchedEffect(dismissState.currentValue) {
 										if (dismissState.currentValue == SwipeToDismissBoxValue.EndToStart) {
-											if (player.uiState.value.queue.any { it.id == song.id }) {
+											if (player.uiState.value.queue.any { it.id == song.id } && !preferenceManager.shushQueueDuplicateDialog) {
 												songToQueue = song
 											} else {
 												player.addToQueueSingle(song)
@@ -337,14 +337,14 @@ fun SearchScreen(
 												onDismissRequest = { viewModel.clearSelectedSong() },
 												song = song,
 												onPlayNext = {
-													if (player.uiState.value.queue.any { it.id == song.id }) {
+													if (player.uiState.value.queue.any { it.id == song.id } && !preferenceManager.shushQueueDuplicateDialog) {
 														songToQueue = song
 													} else {
 														player.playNextSingle(song)
 													}
 												},
 												onAddToQueue = {
-													if (player.uiState.value.queue.any { it.id == song.id }) {
+													if (player.uiState.value.queue.any { it.id == song.id } && !preferenceManager.shushQueueDuplicateDialog) {
 														songToQueue = song
 													} else {
 														player.addToQueueSingle(song)
