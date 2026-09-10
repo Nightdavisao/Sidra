@@ -45,6 +45,7 @@ import paige.navic.icons.Icons
 import paige.navic.icons.outlined.Download
 import paige.navic.icons.outlined.ListArrow
 import paige.navic.icons.outlined.Star
+import paige.navic.ui.theme.defaultFont
 import paige.navic.util.ui.segmentedShapes
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalMaterial3Api::class)
@@ -81,6 +82,7 @@ fun <T> SortSheet(
 				text = stringResource(Res.string.title_sort_by),
 				style = MaterialTheme.typography.headlineMedium,
 				fontWeight = FontWeight.Bold,
+				fontFamily = defaultFont(round = 100f),
 				modifier = Modifier.padding(start = 2.dp, bottom = 16.dp)
 			)
 
