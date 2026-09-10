@@ -28,7 +28,8 @@ import org.koin.compose.koinInject
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.icons.Icons
 import paige.navic.icons.outlined.PlaylistAdd
-import paige.navic.ui.components.common.FormButton
+import paige.navic.ui.components.common.SegmentedListButton
+import paige.navic.ui.components.common.SegmentedListButtonDefaults
 
 @Composable
 fun QueueDuplicateDialog(
@@ -75,16 +76,20 @@ fun QueueDuplicateDialog(
 			}
 		},
 		buttons = {
-			FormButton(
+			SegmentedListButton(
+				modifier = Modifier.fillMaxWidth(),
 				onClick = {
 					onConfirm()
 					onDismissRequest()
-				}
+				},
+				shapes = SegmentedListButtonDefaults.shapes(index = 0, count = 2)
 			) {
 				Text(stringResource(Res.string.action_ok))
 			}
-			FormButton(
-				onClick = onDismissRequest
+			SegmentedListButton(
+				modifier = Modifier.fillMaxWidth(),
+				onClick = onDismissRequest,
+				shapes = SegmentedListButtonDefaults.shapes(index = 1, count = 2)
 			) {
 				Text(stringResource(Res.string.action_cancel))
 			}

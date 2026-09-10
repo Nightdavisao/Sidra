@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.compose.dropUnlessResumed
-import paige.navic.ui.components.common.Form
+import paige.navic.ui.components.common.SegmentedListButtonDefaults
 import paige.navic.ui.navigation.PredictiveBackState
 import paige.navic.ui.navigation.rememberPredictiveBackState
 import paige.navic.ui.theme.defaultFont
@@ -138,9 +138,9 @@ fun FormDialog(
 							}
 						}
 						Spacer(Modifier.height(contentGap))
-						Form(
-							bottomPadding = 0.dp,
-							spacing = 4.dp
+						Column(
+							modifier = Modifier.fillMaxWidth(),
+							verticalArrangement = Arrangement.spacedBy(SegmentedListButtonDefaults.SegmentedGap)
 						) {
 							buttons()
 						}

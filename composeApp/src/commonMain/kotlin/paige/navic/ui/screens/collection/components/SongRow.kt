@@ -15,10 +15,8 @@ import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
@@ -66,12 +64,13 @@ import paige.navic.icons.outlined.QueuePlayNext
 import paige.navic.shared.MediaPlayerViewModel
 import paige.navic.ui.components.common.CoverArt
 import paige.navic.ui.components.common.MarqueeText
+import paige.navic.ui.components.common.SegmentedListItem
+import paige.navic.ui.components.common.SegmentedListItemDefaults
 import paige.navic.ui.components.common.Waveform
 import paige.navic.ui.components.dialogs.QueueDuplicateDialog
 import paige.navic.ui.navigation.Screen
 import paige.navic.ui.util.InlineExplicitIcon
 import paige.navic.ui.util.buildSongInfoString
-import paige.navic.ui.util.segmentedShapes
 import paige.navic.util.toHoursMinutesSeconds
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -104,12 +103,6 @@ fun CollectionDetailScreenSongRow(
 	val scope = rememberCoroutineScope()
 
 	var isPlayNextPending by rememberSaveable { mutableStateOf<Boolean?>(null) }
-
-	val itemShape = segmentedShapes(
-		index = index,
-		count = count,
-		dismissDirection = dismissState.dismissDirection
-	)
 
 	val backStack = LocalNavStack.current
 
@@ -171,9 +164,10 @@ fun CollectionDetailScreenSongRow(
 			contentPadding = PaddingValues(14.dp),
 			onClick = onClick,
 			onLongClick = onLongClick,
-			shapes = itemShape,
-			colors = ListItemDefaults.segmentedColors(
-				containerColor = MaterialTheme.colorScheme.surfaceContainer
+			shapes = SegmentedListItemDefaults.segmentedShapes(
+				index = index,
+				count = count,
+				dismissDirection = dismissState.dismissDirection
 			),
 			leadingContent = {
 				if (isPlaylist)
@@ -188,7 +182,6 @@ fun CollectionDetailScreenSongRow(
 						modifier = Modifier.width(25.dp),
 						style = LocalTextStyle.current.copy(fontFeatureSettings = "tnum"),
 						fontWeight = FontWeight(400),
-						color = MaterialTheme.colorScheme.onSurfaceVariant,
 						maxLines = 1,
 						textAlign = TextAlign.Center,
 						autoSize = TextAutoSize.StepBased(6.sp, 13.sp)

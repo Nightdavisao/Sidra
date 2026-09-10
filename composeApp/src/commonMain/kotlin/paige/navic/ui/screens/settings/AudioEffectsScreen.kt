@@ -3,34 +3,23 @@ package paige.navic.ui.screens.settings
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.dropUnlessResumed
 import navic.composeapp.generated.resources.Res
 import navic.composeapp.generated.resources.option_audio_offload
@@ -55,17 +44,20 @@ import paige.navic.domain.manager.AudioGainManager
 import paige.navic.domain.manager.PreferenceManager
 import paige.navic.domain.models.settings.ReplayGainMode
 import paige.navic.icons.Icons
-import paige.navic.icons.outlined.ChevronForward
 import paige.navic.icons.outlined.Info
-import paige.navic.ui.components.common.Form
-import paige.navic.ui.components.common.FormRow
-import paige.navic.ui.components.common.FormTitle
+import paige.navic.ui.components.common.SegmentedListItem
+import paige.navic.ui.components.common.SegmentedListItemDefaults
 import paige.navic.ui.components.layouts.NestedTopBar
 import paige.navic.ui.navigation.Screen
-import paige.navic.ui.screens.settings.components.SettingSwitchRow
+import paige.navic.ui.screens.settings.components.SettingsGroup
+import paige.navic.ui.screens.settings.components.SettingsGroupDefaults
+import paige.navic.ui.screens.settings.components.SettingsNavItem
+import paige.navic.ui.screens.settings.components.SettingsSliderItem
+import paige.navic.ui.screens.settings.components.SettingsToggleItem
 import kotlin.math.absoluteValue
 import kotlin.math.round
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun AudioEffectsScreen() {
 	val preferenceManager = koinInject<PreferenceManager>()
@@ -77,142 +69,112 @@ fun AudioEffectsScreen() {
 			NestedTopBar(
 				title = { Text(stringResource(Res.string.title_audio_effects)) }
 			)
-		},
-		contentWindowInsets = WindowInsets.statusBars
+		}
 	) { innerPadding ->
 		CompositionLocalProvider(
 			LocalMinimumInteractiveComponentSize provides 0.dp
 		) {
 			Column(
-				Modifier
+				modifier = Modifier
 					.padding(innerPadding)
 					.verticalScroll(rememberScrollState())
-					.padding(top = 16.dp, end = 16.dp, start = 16.dp)
+					.padding(horizontal = 16.dp),
+				verticalArrangement = Arrangement.spacedBy(SettingsGroupDefaults.GapBetweenGroups)
 			) {
-
-				FormTitle(stringResource(Res.string.title_playback))
-				Form {
-					FormRow(
+				SettingsGroup(title = { Text(stringResource(Res.string.title_playback)) }) {
+					SettingsNavItem(
 						onClick = dropUnlessResumed { backStack.add(Screen.Settings.Equaliser) },
-						horizontalArrangement = Arrangement.Start,
-						enabled = !preferenceManager.audioOffload
-					) {
-						Column(Modifier.weight(1f)) {
-							Text(stringResource(Res.string.option_equaliser))
+						content = { Text(stringResource(Res.string.option_equaliser)) },
+						enabled = !preferenceManager.audioOffload,
+						supportingContent = {
 							Text(
 								text = stringResource(
 									if (!preferenceManager.audioOffload)
 										Res.string.subtitle_equaliser
 									else Res.string.subtitle_equaliser_disabled
-								),
-								style = MaterialTheme.typography.bodyMedium,
-								color = MaterialTheme.colorScheme.onSurfaceVariant
+								)
 							)
-						}
-						Icon(Icons.Outlined.ChevronForward, null)
-					}
-					SettingSwitchRow(
-						title = { Text(stringResource(Res.string.option_gapless_playback)) },
-						subtitle = { Text(stringResource(Res.string.subtitle_gapless_playback)) },
-						value = preferenceManager.gaplessPlayback,
-						onSetValue = { preferenceManager.gaplessPlayback = it }
+						},
+						shapes = SegmentedListItemDefaults.segmentedShapes(index = 0, count = 3)
 					)
-					SettingSwitchRow(
-						title = { Text(stringResource(Res.string.option_audio_offload)) },
-						subtitle = { Text(stringResource(Res.string.subtitle_audio_offload)) },
-						value = preferenceManager.audioOffload,
-						onSetValue = { preferenceManager.audioOffload = it }
+					SettingsToggleItem(
+						checked = preferenceManager.gaplessPlayback,
+						onCheckedChange = { preferenceManager.gaplessPlayback = it },
+						content = { Text(stringResource(Res.string.option_gapless_playback)) },
+						supportingContent = { Text(stringResource(Res.string.subtitle_gapless_playback)) },
+						shapes = SegmentedListItemDefaults.segmentedShapes(index = 1, count = 3)
+					)
+					SettingsToggleItem(
+						checked = preferenceManager.audioOffload,
+						onCheckedChange = { preferenceManager.audioOffload = it },
+						content = { Text(stringResource(Res.string.option_audio_offload)) },
+						supportingContent = { Text(stringResource(Res.string.subtitle_audio_offload)) },
+						shapes = SegmentedListItemDefaults.segmentedShapes(index = 2, count = 3)
 					)
 				}
 
-				FormTitle(stringResource(Res.string.option_replaygain_mode))
-				Form(Modifier.selectableGroup()) {
-					ReplayGainMode.entries.forEach { mode ->
+				SettingsGroup(
+					modifier = Modifier.selectableGroup(),
+					title = { Text(stringResource(Res.string.option_replaygain_mode)) }
+				) {
+					ReplayGainMode.entries.forEachIndexed { index, mode ->
+						val selected = preferenceManager.replayGainMode == mode
 						val interactionSource = remember { MutableInteractionSource() }
 
-						FormRow(
-							modifier = Modifier.selectable(
-								selected = preferenceManager.replayGainMode == mode,
-								interactionSource = interactionSource,
-								onClick = {
-									preferenceManager.replayGainMode = mode
-									audioGainManager.applyGainMode(mode)
-								},
-								role = Role.RadioButton
+						SegmentedListItem(
+							shapes = SegmentedListItemDefaults.segmentedShapes(
+								index = index,
+								count = ReplayGainMode.entries.count()
 							),
-							horizontalArrangement = Arrangement.spacedBy(14.dp),
-							contentPadding = PaddingValues(16.dp)
-						) {
-							RadioButton(
-								selected = preferenceManager.replayGainMode == mode,
-								onClick = null
-							)
-
-							Text(stringResource(mode.displayName))
-						}
+							selected = selected,
+							onClick = {
+								preferenceManager.replayGainMode = mode
+								audioGainManager.applyGainMode(mode)
+							},
+							interactionSource = interactionSource,
+							leadingContent = {
+								RadioButton(
+									selected = selected,
+									interactionSource = interactionSource,
+									onClick = null
+								)
+							},
+							content = { Text(stringResource(mode.displayName)) }
+						)
 					}
 				}
 
 				InformationTip(stringResource(Res.string.option_dynamic_replaygain_tip))
 
-				FormTitle(stringResource(Res.string.option_title_preamp))
-				Form {
-					FormRow {
-						Column(Modifier.fillMaxWidth()) {
-							Row(
-								modifier = Modifier.fillMaxWidth(),
-								horizontalArrangement = Arrangement.SpaceBetween
-							) {
-								Text(stringResource(Res.string.option_preamp_with_rg))
-								Text(
-									preferenceManager.rgAmpGain.decibelsToHuman(),
-									fontFamily = FontFamily.Monospace,
-									fontWeight = FontWeight(400),
-									fontSize = 13.sp,
-									color = MaterialTheme.colorScheme.onSurfaceVariant,
-								)
-							}
-							Slider(
-								value = preferenceManager.rgAmpGain,
-								onValueChange = {
-									preferenceManager.rgAmpGain = it.round(1)
-									audioGainManager.setAmplifierValues(
-										it,
-										preferenceManager.ampGain
-									)
-								},
-								valueRange = -12f..12f,
+				SettingsGroup(title = { Text(stringResource(Res.string.option_title_preamp)) }) {
+					SettingsSliderItem(
+						content = { Text(stringResource(Res.string.option_preamp_with_rg)) },
+						trailingContent = { Text(preferenceManager.rgAmpGain.decibelsToHuman()) },
+						value = preferenceManager.rgAmpGain,
+						valueRange = -12f..12f,
+						onValueChange = {
+							preferenceManager.rgAmpGain = it.round(1)
+							audioGainManager.setAmplifierValues(
+								withReplayGain = it,
+								withoutReplayGain = preferenceManager.ampGain
 							)
-						}
-					}
-					FormRow {
-						Column(Modifier.fillMaxWidth()) {
-							Row(
-								modifier = Modifier.fillMaxWidth(),
-								horizontalArrangement = Arrangement.SpaceBetween
-							) {
-								Text(stringResource(Res.string.option_preamp_without_rg))
-								Text(
-									preferenceManager.ampGain.decibelsToHuman(),
-									fontFamily = FontFamily.Monospace,
-									fontWeight = FontWeight(400),
-									fontSize = 13.sp,
-									color = MaterialTheme.colorScheme.onSurfaceVariant,
-								)
-							}
-							Slider(
-								value = preferenceManager.ampGain,
-								onValueChange = {
-									preferenceManager.ampGain = it.round(1)
-									audioGainManager.setAmplifierValues(
-										preferenceManager.rgAmpGain,
-										it
-									)
-								},
-								valueRange = -12f..12f,
+						},
+						shapes = SegmentedListItemDefaults.segmentedShapes(index = 0, count = 2)
+					)
+					SettingsSliderItem(
+						content = { Text(stringResource(Res.string.option_preamp_without_rg)) },
+						trailingContent = { Text(preferenceManager.ampGain.decibelsToHuman()) },
+						value = preferenceManager.ampGain,
+						valueRange = -12f..12f,
+						onValueChange = {
+							preferenceManager.ampGain = it.round(1)
+							audioGainManager.setAmplifierValues(
+								withReplayGain = preferenceManager.rgAmpGain,
+								withoutReplayGain = it
 							)
-						}
-					}
+						},
+						shapes = SegmentedListItemDefaults.segmentedShapes(index = 1, count = 2)
+					)
 				}
 
 				InformationTip(stringResource(Res.string.option_preamp_tip))
@@ -235,6 +197,8 @@ private fun Float.decibelsToHuman(): String {
 			append("-")
 		} else if (decibels > 0) {
 			append("+")
+		} else {
+			append(" ")
 		}
 		append("${decibels.absoluteValue}db")
 	}
@@ -257,5 +221,4 @@ private fun InformationTip(text: String) {
 			style = MaterialTheme.typography.bodyMedium
 		)
 	}
-	Spacer(Modifier.height(24.dp))
 }

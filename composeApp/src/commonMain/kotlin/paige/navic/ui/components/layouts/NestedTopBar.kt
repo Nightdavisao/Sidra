@@ -51,7 +51,7 @@ fun NestedTopBar(
 		navigationIcon = {
 			if (!hideBack) {
 				TopBarButton(
-					modifier = Modifier.padding(horizontal = 12.dp),
+					modifier = Modifier.padding(start = 20.dp, end = 13.dp),
 					onClick = dropUnlessResumed {
 						if (backStack.size > 1) {
 							backStack.removeLastOrNull()
