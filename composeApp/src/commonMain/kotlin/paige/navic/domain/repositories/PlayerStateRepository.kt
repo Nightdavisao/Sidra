@@ -20,7 +20,9 @@ import paige.navic.util.core.Logger
 class PlayerStateRepository(
 	private val preferences: DataStore<Preferences>
 ) {
-	private val json = Json
+	private val json = Json {
+		ignoreUnknownKeys = true
+	}
 	private val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 
 	val state = preferenceStateFlow {
