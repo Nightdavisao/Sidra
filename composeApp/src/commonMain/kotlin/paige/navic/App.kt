@@ -68,7 +68,6 @@ import paige.navic.domain.manager.SessionManager
 import paige.navic.domain.manager.SnackBarManager
 import paige.navic.domain.models.settings.ExplicitContentPlayback
 import paige.navic.shared.MediaPlayerViewModel
-import paige.navic.ui.components.dialogs.SideloadingDialog
 import paige.navic.ui.components.sheets.ChangelogSheet
 import paige.navic.ui.components.snackbars.NavicSnackBar
 import paige.navic.ui.navigation.BottomSheetSceneStrategy
@@ -89,8 +88,8 @@ import paige.navic.ui.screens.playlist.PlaylistListScreen
 import paige.navic.ui.screens.queue.QueueScreen
 import paige.navic.ui.screens.radio.RadioListScreen
 import paige.navic.ui.screens.search.SearchScreen
-import paige.navic.ui.screens.settings.BottomBarScreen
 import paige.navic.ui.screens.settings.AudioEffectsScreen
+import paige.navic.ui.screens.settings.BottomBarScreen
 import paige.navic.ui.screens.settings.FontsScreen
 import paige.navic.ui.screens.settings.SettingsAboutScreen
 import paige.navic.ui.screens.settings.SettingsAcknowledgementsScreen
@@ -260,11 +259,6 @@ fun App() {
 							)
 						}
 					)
-				}
-				if (!preferenceManager.showedSideloadingWarning
-					&& platformContext.name.lowercase().contains("android")
-				) {
-					SideloadingDialog()
 				}
 				// version check is annoying to do on iOS
 				if (preferenceManager.checkForUpdates && platformContext.platformType == PlatformType.Android) {
