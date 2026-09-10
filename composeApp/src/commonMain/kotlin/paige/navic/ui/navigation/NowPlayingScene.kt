@@ -34,7 +34,7 @@ import paige.navic.ui.components.sheets.ModalBottomSheet
 import paige.navic.ui.theme.NavicTheme
 import paige.navic.util.ui.LocalSheetState
 import paige.navic.util.ui.rememberColorSchemeForCurrentSong
-import paige.navic.util.ui.rememberScreenCornerRadius
+import paige.navic.ui.util.rememberScreenCornerRadius
 
 class NowPlayingScene<T : Any>(
 	override val key: Any,

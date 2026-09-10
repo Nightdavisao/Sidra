@@ -31,7 +31,7 @@ import paige.navic.domain.models.DomainSong
 import paige.navic.domain.models.settings.ToolbarPosition
 import paige.navic.shared.MediaPlayerViewModel
 import paige.navic.ui.components.common.ErrorBox
-import paige.navic.ui.components.common.KeepScreenOn
+import paige.navic.ui.util.KeepScreenOn
 import paige.navic.ui.components.layouts.SheetScaffold
 import paige.navic.ui.core.UiState
 import paige.navic.ui.navigation.PersistentViewModelStoreOwner

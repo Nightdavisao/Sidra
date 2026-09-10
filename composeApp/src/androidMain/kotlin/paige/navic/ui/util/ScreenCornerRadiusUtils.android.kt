@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright (C) 2025-2026 InstallerX Revived contributors
 
-package paige.navic.util.ui
+package paige.navic.ui.util
 
 import android.annotation.SuppressLint
 import android.content.Context

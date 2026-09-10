@@ -55,7 +55,7 @@ import paige.navic.icons.outlined.Note
 import paige.navic.icons.outlined.PlaylistPlay
 import paige.navic.icons.outlined.Radio
 import paige.navic.icons.outlined.Search
-import paige.navic.ui.components.common.animatedTabIconPainter
+import paige.navic.ui.util.animatedTabIconPainter
 import paige.navic.ui.core.UiState
 import paige.navic.ui.navigation.Screen
 import paige.navic.ui.screens.settings.viewmodels.NavtabsViewModel

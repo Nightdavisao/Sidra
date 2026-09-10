@@ -1,4 +1,4 @@
-package paige.navic.ui.components.common
+package paige.navic.ui.util
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter

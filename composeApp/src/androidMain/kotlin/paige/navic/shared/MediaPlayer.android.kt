@@ -58,6 +58,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import paige.navic.data.database.dao.AlbumDao
 import paige.navic.data.database.mappers.toDomainModel
+import paige.navic.di.ResourceProvider
 import paige.navic.domain.manager.AndroidScrobbleManager
 import paige.navic.domain.manager.AudioGainManager
 import paige.navic.domain.manager.ConnectivityManager
@@ -79,7 +80,6 @@ import paige.navic.domain.repositories.SongRepository
 import paige.navic.exoplayer.AudioGainProcessor
 import paige.navic.ui.core.PlayerUiState
 import paige.navic.util.core.Logger
-import paige.navic.util.core.ResourceProvider
 import java.io.File
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
