@@ -162,10 +162,7 @@ fun AccountSheet(
 					index = 1,
 					count = 3
 				),
-				onClick = {
-					animateToDismiss()
-					backStack.add(Screen.ShareList)
-				},
+				onClick = { sleepTimerSheetOpen = true },
 				leadingContent = {
 					val tint = when (sleepTimerMode) {
 						!is SleepTimerMode.Disabled -> MaterialTheme.colorScheme.positive
