@@ -21,7 +21,6 @@ import androidx.media3.common.Player
 import androidx.media3.common.Timeline
 import androidx.media3.common.TrackSelectionParameters
 import androidx.media3.common.Tracks
-import androidx.media3.common.util.ExperimentalApi
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.DefaultHttpDataSource
@@ -118,7 +117,6 @@ class PlaybackService : MediaSessionService(), KoinComponent {
 	private var currentAudioSessionId: Int = C.AUDIO_SESSION_ID_UNSET
 	private var equaliserMode: EqualiserMode = EqualiserMode.Disabled
 
-	@ExperimentalApi
 	override fun onCreate() {
 		super.onCreate()
 		val loadControl = DefaultLoadControl.Builder()
@@ -173,7 +171,6 @@ class PlaybackService : MediaSessionService(), KoinComponent {
 			.setLoadControl(loadControl)
 			.setMediaSourceFactory(mediaSourceFactory)
 			.setHandleAudioBecomingNoisy(true)
-			.enablePerStreamMediaProgression(true)
 			.setWakeMode(C.WAKE_MODE_NETWORK)
 			.build()
 			.apply {
